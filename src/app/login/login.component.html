@@ -1,0 +1,38 @@
+<mat-card >
+  <mat-card-title><h4>Login</h4></mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="contactForm" (submit)="onSubmit(name,password)">
+      <div>
+      <mat-form-field floatLabel="always" appearance="legacy">
+        <div>Email Address:</div>
+        <input matInput type="email"  name="name" [(ngModel)]="name" formControlName="name">   
+      
+      
+      <mat-error *ngIf="(contactForm.get('name')?.touched||contactForm.get('name')?.dirty) && contactForm.get('name')?.hasError('required')">
+        Name is Required!
+      </mat-error>
+      <mat-error *ngIf="(contactForm.get('name')?.touched||contactForm.get('name')?.dirty) && contactForm.get('name')?.hasError('minlength')">
+        Name should be atleast 3 characters long!!
+      </mat-error> 
+    </mat-form-field>    
+  </div>
+    <div>
+      <mat-form-field  floatLabel="always" appearance="standard">
+        <div>Password </div>
+        <input matInput name="password" [(ngModel)]="password" formControlName="password">
+      
+      <mat-error *ngIf="(contactForm.get('password')?.touched||contactForm.get('password')?.dirty) && contactForm.get('password')?.hasError('required')">
+        Password is Required!
+      </mat-error>
+    </mat-form-field>
+  </div>      
+      <!-- <mat-form-field> -->
+        <!-- <a routerLink="/{{quiz.name}}"> -->
+          <div>
+          <button mat-raised-button color="primary" class="primary" [disabled]="contactForm.invalid" type="submit">Log In</button>
+        </div>
+        <!-- </a> -->
+      <!-- </mat-form-field> -->
+    </form>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,68 @@
+import { Component } from '@angular/core'
+import { LoginComponent } from '../login/login.component'
+import { MatDialog } from  '@angular/material/dialog';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+
+
+@Component({
+  selector: 'nav-bar',
+  templateUrl: './navbar.component.html',
+  styles:[ `
+  header#myHeader {
+    box-shadow: 20px -30px 35px 15px grey;
+    top: 0;
+    width: 100%;
+    z-index: 99999;
+
+ }
+ a{
+   color: black;
+ }
+ 
+ .img-fluid{
+    display: inline-block;
+    margin-right: 5% !important;
+ }
+
+ .flex{
+    margin: 10px 10px 0 10px;
+    display:flex;
+    align-items: center;
+}
+ @media(min-wdith: 992px){
+ .flex{
+    flex-direction: row;
+    flex-wrap:nowrap;
+    justify-content: flex-start;
+ }
+}
+
+  a.active{
+   color:  blue;
+  }
+
+ a.nav-item{
+    margin-right: 80px;
+    margin-left: 80px;
+    text-decoration: none;
+    font-size:larger;
+     
+ }`]
+
+})
+
+export class NavBarComponent {
+  constructor(public modalService: NgbModal) { }
+  openModal() {
+    
+    const modalRef = this.modalService.open(LoginComponent);
+    modalRef.result.then((result) => {
+      console.log(result);
+      
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+  ngOnInit(): void {
+  }
+}

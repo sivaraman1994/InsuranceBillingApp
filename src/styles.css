@@ -1,1 +1,22 @@
-/* You can add global styles to this file, and also import other style files */
+body{
+  background-color: rgb(235, 232, 232);
+}
+.nav-item:hover {
+    color: orange;
+    cursor: pointer;
+  }
+  
+  .container {
+    padding-top: 10px;
+  }
+  
+  .pointable {
+    cursor: pointer;
+  }
+  
+  button {
+    color: #555;
+  }
+  
+
+  
