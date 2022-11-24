@@ -2,6 +2,7 @@ import { Component } from '@angular/core'
 import { LoginComponent } from '../login/login.component'
 import { MatDialog } from  '@angular/material/dialog';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {  Router } from '@angular/router';
 
 
 @Component({
@@ -52,17 +53,18 @@ import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 })
 
 export class NavBarComponent {
-  constructor(public modalService: NgbModal) { }
+  constructor(public modalService: NgbModal, private router:Router) { }
   openModal() {
+    // this.router.navigate(['/login']);
     
-    const modalRef = this.modalService.open(LoginComponent);
-    modalRef.result.then((result) => {
-      console.log(result);
-      
-    }).catch((error) => {
-      console.log(error);
+    const modalRef = this.modalService.open(LoginComponent,{
+      backdrop: false,
+      keyboard: true,
+      size:'xxlg',
     });
+    
   }
+ 
   ngOnInit(): void {
   }
 }

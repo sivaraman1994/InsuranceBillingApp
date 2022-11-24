@@ -5,6 +5,8 @@ body{
     color: orange;
     cursor: pointer;
   }
+  @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+  @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
   
   .container {
     padding-top: 10px;
