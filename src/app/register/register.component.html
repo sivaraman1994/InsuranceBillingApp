@@ -1,0 +1,35 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit(fullName,email,password)" action="action_page.php" style="border:1px solid #ccc" novalidate>
+  
+  <div class="container">
+    <h4>Sign Up</h4><br>
+    
+    <label for="fname"><b>Full Name</b></label>
+    <input type="text" placeholder="Full Name" [(ngModel)]="fullName" formControlName="fullName"/>
+    <mat-error *ngIf="(registerForm.get('fullName')?.touched||registerForm.get('fullName')?.dirty) && registerForm.get('fullName')?.hasError('required')">
+      Name is Required!
+    </mat-error><br>
+    <mat-error *ngIf="(registerForm.get('fullName')?.touched||registerForm.get('fullName')?.dirty) && registerForm.get('fullName')?.hasError('minlength')">
+      Name should be atleast 3 characters long!!
+    </mat-error><br>
+
+    <label for="email"><b>Email Address: </b></label>
+    <input type="text" placeholder="Enter Email" [(ngModel)]="email" formControlName="email"/>
+    <mat-error *ngIf="registerForm.get('email')?.hasError('required')">
+      Email is Required!
+    </mat-error><br>
+    <mat-error *ngIf="registerForm.get('email')?.hasError('email')">
+      Please enter a valid email address!
+    </mat-error><br>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" [(ngModel)]="password" formControlName="password"/>
+    <mat-error *ngIf="(registerForm.get('password')?.touched||registerForm.get('password')?.dirty) && registerForm.get('password')?.hasError('required')">
+      Password is Required!
+    </mat-error>
+    
+    <div class="clearfix">
+      <button type="button" class="cancelbtn" (click)="cancel()">Cancel</button>
+      <button type="submit" class="signupbtn">Sign Up</button>
+    </div>
+  </div>
+</form>

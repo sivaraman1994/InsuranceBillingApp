@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeDetailsComponent } from './home/home.component';
 import { NavBarComponent } from './nav/navbar.component';
+import { RegisterComponent } from './register/register.component';
 import { FooterbarComponent } from './footer/footer.component';
 
 import {MatExpansionModule} from '@angular/material/expansion';
@@ -53,6 +54,7 @@ import { BackendApiService } from './services/backend-api.service';
     HomeDetailsComponent,
     FooterbarComponent,
     NavBarComponent,
+    RegisterComponent,
     PolicyDetailsComponent,
     ViewInvoiceComponent,
     LoginComponent

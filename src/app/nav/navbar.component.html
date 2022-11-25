@@ -10,6 +10,7 @@
         [routerLinkActiveOptions]="{exact:true}">View Invoice/Pay</a>
       <a class="nav-item" class="btn btn-primary" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true} "
         (click)="openModal()">Sign In</a>
+        <u class="nav-item" id="nav-link" [routerLink]="['/register']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true} " (click)="openNewModal()">New User? Register</u>
     </div>
   </div>
 </header>
