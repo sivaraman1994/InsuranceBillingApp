@@ -4,12 +4,6 @@
     </div>
     <div class="card-body">
         <div class="row">
-           <div class="col-md-2">Filter By:</div>
-           <div class="col-md-4">
-              <input type="text" [(ngModel)]='listFilter'/>
-           </div>
-        </div>
-        <div class="row">
             <div class="col-md-6">
                <h4>Filtered By: {{listFilter}}</h4>
             </div>
@@ -36,17 +30,17 @@
                         <td>
                             <img *ngIf='showImage'
                                 [src]='policy.imageUrl'
-                                [title]='policy.policyName'
+                                [title]='policy.userName'
                                 [style.width.px]='imageWidth'
                                 [style.margin.px]='imageMargin'>
                         </td>
-                        <td><a [routerLink]="['/policy',policy.policyId]">
-                              {{policy.policyName}}
+                        <td><a>
+                              {{policy.userName}}
                             </a>
                         </td>
-                        <td>{{policy.policyCode | lowercase | convertToSpaces : '-'}}</td>
+                        <td>{{policy.policyCode}}</td>
                         <td>{{policy.releaseDate}}</td>
-                        <td>{{policy.price | currency:'Rs. ':'symbol':'1.2-2'}}</td>
+                        <td>{{policy.price}}</td>
                     </tr>
                 </tbody>
             </table>

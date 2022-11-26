@@ -17,7 +17,7 @@ export class PolicyDetailsComponent implements OnInit {
     this.pageTitle = this.pageTitle + ` ${id}`;
     this.policy = {
       "policyId": id,
-      "policyName": "Sugar Cosmetics Eyeliner",
+      "userName": "Chaitali Mane",
       "policyCode": "GDN-0011",
       "releaseDate": "March 19, 2021",
       "description": "Sugar Cosmetics eyeliner is water-proof",

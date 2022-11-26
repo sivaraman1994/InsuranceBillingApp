@@ -1,6 +1,6 @@
 export interface IPolicy {
     policyId: number;
-    policyName:string;
+    userName:string;
     policyCode:string;
     releaseDate: string;
     description:string;
