@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { BackendApiService } from '../services/backend-api.service';
 
 
 @Component({
@@ -15,9 +16,10 @@ export class RegisterComponent implements OnInit {
     fullName!: String;
     email! : String;
     password!: String;
-  modalService: any;
+    modalService: any;
 
-    constructor(private activeModal: NgbActiveModal,public formBuilder: FormBuilder, private router:Router) { }
+    constructor(public formBuilder: FormBuilder,private apiService:BackendApiService
+      ,private router:Router) { }
 
     ngOnInit() {
         this.registerForm = this.formBuilder.group({
@@ -26,13 +28,27 @@ export class RegisterComponent implements OnInit {
             password: ['', [Validators.required, Validators.minLength(6)]]
         });
     }
-
-
-    onSubmit(name: String, email: String, password: String){
-      console.log("form submitted with name"+name+", email"+email+"and password"+password);
+    onSubmit(fullName: String, email: String, password: String){
+      console.log("Form submitted with name: "+fullName+", EmailID: "+email+" and password: "+password);
+      let userDetails = {
+        userID:fullName,
+        emailID:email,
+        password:password
+      }
+      this.apiService.checkUser(userDetails).subscribe((res:any)=>{
+        // alert(JSON.stringify(res) +" ____________")
+        
+         if(res.token){
+          alert("new user")
+        //  this.route.navigate(['/'+url]);
+        }else alert("existing user");
+      },(err)=>{
+  
+        console.log("response"+err);
+        this.registerForm.setErrors({ unauthenticated: true });
+      })
     }
-
     cancel(){
-      this.router.navigate(['home'])
+      this.router.navigate(['home']);
     }
-}
+  }

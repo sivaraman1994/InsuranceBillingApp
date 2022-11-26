@@ -1,8 +1,10 @@
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit(fullName,email,password)" action="action_page.php" style="border:1px solid #ccc" novalidate>
+<form [formGroup]="registerForm" (submit)="onSubmit(fullName, email, password)" action="action_page.php" style="border:1px solid #ccc" novalidate>
   
   <div class="container">
     <h4>Sign Up</h4><br>
-    
+    <div *ngIf="registerForm.errors?.['unauthenticated']">
+      Username already exists. Please Login/create other account.
+    </div>
     <label for="fname"><b>Full Name</b></label>
     <input type="text" placeholder="Full Name" [(ngModel)]="fullName" formControlName="fullName"/>
     <mat-error *ngIf="(registerForm.get('fullName')?.touched||registerForm.get('fullName')?.dirty) && registerForm.get('fullName')?.hasError('required')">
@@ -28,8 +30,8 @@
     </mat-error>
     
     <div class="clearfix">
-      <button type="button" class="cancelbtn" (click)="cancel()">Cancel</button>
-      <button type="submit" class="signupbtn">Sign Up</button>
+      <button mat-raised-button type="button" class="cancelbtn" (click)="cancel()">Cancel</button>
+      <button mat-raised-button type="submit" class="signupbtn" [disabled]="registerForm.invalid">Sign Up</button>
     </div>
   </div>
 </form>

@@ -14,7 +14,7 @@
 button {
   background-color: #04AA6D;
   color: white;
-  padding: 10px 10px;
+  padding: 5px 5px;
   border: none;
   cursor: pointer;
   width: 100%;
@@ -27,7 +27,7 @@ button:hover {
 
 /* Extra styles for the cancel button */
 .cancelbtn {
-  padding: 10px 10px;
+  padding: 5px 5px;
   background-color: #f44336;
 }
 
