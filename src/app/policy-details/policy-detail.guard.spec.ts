@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { PolicyDetailGuard } from './policy-detail.guard';
 
-describe('ProductDetailGuard', () => {
+describe('PolicyDetailGuard', () => {
   let guard: PolicyDetailGuard;
 
   beforeEach(() => {

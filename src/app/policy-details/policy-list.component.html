@@ -1,7 +1,5 @@
-<div class="card">
-    <div class="card header">
-        {{pageTitle}}
-    </div>
+<div>
+    Policy List
     <div class="card-body">
         <div class="row">
             <div class="col-md-6">
@@ -9,31 +7,19 @@
             </div>
         </div>
         <div class="table-responsive">
-            <table class="table"  *ngIf='policy.length'>
+            <table class="table">
                 <thead>
                     <tr>
-                        <th>
-                            <button class="btn-btn-primary"
-                                  (click)="toggleImage()">
-                                 {{showImage ? "Hide" : "Show"}} Image
-                            </button>
-                        </th>
-                        <th>Policy</th>
-                        <th>Code</th>
-                        <th>Available</th>
-                        <th>Price</th>
-                        <th>5 Star Rating</th>
+                        <th>SrId</th>
+                        <th>Username</th>
+                        <th>PolicyID</th>
+                        <th>Coverages</th>
+                        <th>Premium</th>
+                        <th>PaymentStatus</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor='let policy of filteredPolicy'>
-                        <td>
-                            <img *ngIf='showImage'
-                                [src]='policy.imageUrl'
-                                [title]='policy.userName'
-                                [style.width.px]='imageWidth'
-                                [style.margin.px]='imageMargin'>
-                        </td>
                         <td><a>
                               {{policy.userName}}
                             </a>

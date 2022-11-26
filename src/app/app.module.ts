@@ -25,6 +25,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { BackendApiService } from './services/backend-api.service';
+import { PolicyListComponent } from './policy-details/policy-list.component';
+import { convertToSpacesPipe } from './policy-details/convert-to-space.pipe';
 
 
 @NgModule({
@@ -44,8 +46,12 @@ import { BackendApiService } from './services/backend-api.service';
     MatInputModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes)
-  ],
+    RouterModule.forRoot(appRoutes),
+    RouterModule.forChild([
+      {path: 'policy', component: PolicyListComponent}
+
+  ])
+],
   exports:[
     MatCardModule
   ],
@@ -55,7 +61,9 @@ import { BackendApiService } from './services/backend-api.service';
     FooterbarComponent,
     NavBarComponent,
     RegisterComponent,
+    PolicyListComponent,
     PolicyDetailsComponent,
+    convertToSpacesPipe,
     ViewInvoiceComponent,
     LoginComponent
   ],
