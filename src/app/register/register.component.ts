@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, NgModule } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BackendApiService } from '../services/backend-api.service';
+import { RegisterService } from '../services/register.service';
 
 
 @Component({
@@ -16,10 +17,11 @@ export class RegisterComponent implements OnInit {
     fullName!: String;
     email! : String;
     password!: String;
-    modalService: any;
+    constructor(public formBuilder: FormBuilder,private apiService:BackendApiService,
+      private registerService:RegisterService
+      ,private router:Router,public modalService: NgbModal) { }
 
-    constructor(public formBuilder: FormBuilder,private apiService:BackendApiService
-      ,private router:Router) { }
+      
 
     ngOnInit() {
         this.registerForm = this.formBuilder.group({
@@ -31,24 +33,19 @@ export class RegisterComponent implements OnInit {
     onSubmit(fullName: String, email: String, password: String){
       console.log("Form submitted with name: "+fullName+", EmailID: "+email+" and password: "+password);
       let userDetails = {
-        userID:fullName,
-        emailID:email,
+        name:fullName,
+        userID:email,
         password:password
       }
-      this.apiService.checkUser(userDetails).subscribe((res:any)=>{
-        // alert(JSON.stringify(res) +" ____________")
-        
-         if(res.token){
-          alert("new user")
-        //  this.route.navigate(['/'+url]);
-        }else alert("existing user");
-      },(err)=>{
-  
-        console.log("response"+err);
-        this.registerForm.setErrors({ unauthenticated: true });
+      this.registerService.addUser(userDetails).subscribe( (res) => {
+         alert('User Added.')
+         this.modalService.dismissAll();
+      },
+        (err) => {
+          console.log(err)
       })
-    }
-    cancel(){
-      this.router.navigate(['home']);
-    }
   }
+  cancel(){
+     this.modalService.dismissAll();
+  }
+}

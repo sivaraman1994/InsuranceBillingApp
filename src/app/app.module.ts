@@ -27,6 +27,7 @@ import { LoginComponent } from './login/login.component';
 import { BackendApiService } from './services/backend-api.service';
 import { PolicyListComponent } from './policy-details/policy-list.component';
 import { convertToSpacesPipe } from './policy-details/convert-to-space.pipe';
+import { RegisterService } from './services/register.service';
 
 
 @NgModule({
@@ -68,7 +69,10 @@ import { convertToSpacesPipe } from './policy-details/convert-to-space.pipe';
     LoginComponent
   ],
   providers:  [BackendApiService, [{provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'legacy'}}],
-  [{provide: MatFormFieldControl}]],
+  [{provide: MatFormFieldControl}],
+  RegisterService
+],
+  
   bootstrap: [AppComponent]
 })
 export class AppModule { }
