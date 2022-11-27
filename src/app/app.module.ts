@@ -59,8 +59,8 @@ import { BackendApiService } from './services/backend-api.service';
     ViewInvoiceComponent,
     LoginComponent
   ],
-  providers:  [BackendApiService, [{provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'legacy'}}],
+  providers:  [BackendApiService, NavBarComponent, [{provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'legacy'}}],
   [{provide: MatFormFieldControl}]],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

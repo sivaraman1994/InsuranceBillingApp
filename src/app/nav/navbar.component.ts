@@ -74,7 +74,17 @@ export class NavBarComponent {
       size:'xxlg',
     });
     
+    modalRef.result.then((result) => {
+      console.log(result);
+      this.modalService.dismissAll();
+      
+    }).catch((error) => {
+      console.log(error);
+    });
+    
+    
   }
+  
   openNewModal(){
     const modalRef = this.modalService.open(RegisterComponent);
     modalRef.result.then((result) => {
