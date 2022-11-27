@@ -4,15 +4,12 @@ import { IPolicy } from "./policy";
 import { PolicyService } from "./policy.service";
 
 @Component({
-    //selector: 'pm-policy',
+    selector: 'app-policy-list',
     templateUrl: './policy-list.component.html',
+    styleUrls: ['./policy-list.component.css']
 
 })
 export class PolicyListComponent implements OnInit, OnDestroy{
-    pageTitle:string = "Policy List";
-    imageWidth: number = 100;
-    imageMargin: number = 2;
-    showImage: boolean = false;
     errorMessage = '';
     sub!: Subscription;
     
@@ -28,9 +25,6 @@ export class PolicyListComponent implements OnInit, OnDestroy{
     policy: IPolicy[] = [];
 
      constructor(private productService: PolicyService){}
-     toggleImage(): void{
-          this.showImage = !this.showImage
-     };
  
      ngOnInit(): void {
       this.sub = this.productService.getPolicy().subscribe({
@@ -45,10 +39,6 @@ export class PolicyListComponent implements OnInit, OnDestroy{
 
      ngOnDestroy(): void {
          this.sub.unsubscribe();
-     }
-
-     onRatingClicked(message: string):void{
-      this.pageTitle= 'Policy List: ' + message;
      }
 
 }

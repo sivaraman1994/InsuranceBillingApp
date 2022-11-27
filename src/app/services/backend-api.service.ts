@@ -15,10 +15,5 @@ export class BackendApiService {
     // return this.http.post("https://upskillingapi.herokuapp.com/checkAccess",data);
     return this.http.post("http://localhost:4011/validateUser",data);
   }
-  checkUser(data:any){
-    // return this.http.post("https://upskillingapi.herokuapp.com/checkAccess",data);
-    return this.http.post("http://localhost:4011/registerUser",data);
-
-  }
   
 }
