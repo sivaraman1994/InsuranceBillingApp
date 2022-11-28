@@ -45,13 +45,11 @@
     <mat-card class="quiz">
       <mat-card-content>
         <form [formGroup]="contactForm" (submit)="onSubmit(name,password)">
-           <!-- <div *ngIf="contactForm.errors?.['unauthenticated']">
-        Username or Password incorrect. Please Cancel and Naviagate to Sign Up Page.
-      </div> -->
+       
       <div *ngIf="isNotAuthorized == true">
         Password incorrect. Plese enter valid password.
       </div>
-      <div *ngIf="isUserIdExists == true">
+      <div *ngIf="isUserIdMissing == true">
         User ID does not exist. Click Cancel and Navaigate to Sign Up page.
       </div>
           <mat-form-field class="full-width">

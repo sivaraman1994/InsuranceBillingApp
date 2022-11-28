@@ -9,8 +9,7 @@ import { Observable, throwError } from 'rxjs';
 export class RegisterService {
 
   headers = new HttpHeaders().set('Content-Type','application/json')
-  baseUrl:String = 'http://localhost:3000/register-api' 
-
+  
   constructor(private _http:HttpClient) { }
 
   errmanage(err:HttpErrorResponse){
@@ -23,11 +22,8 @@ export class RegisterService {
      }
     
     addUser(data:any): Observable<any>{
-       return this._http.post(this.baseUrl+'/add-user', data).pipe(catchError(this.errmanage))
+       return this._http.post("http://localhost:3000/registerUser", data).pipe(catchError(this.errmanage))
     }
     
-    getUser(data:any): Observable<any>{
-      return this._http.get(this.baseUrl+'/get-user', data).pipe(catchError(this.errmanage))
-   }
     
 }

@@ -64,8 +64,9 @@ import { RegisterComponent } from '../register/register.component';
 })
 
 export class NavBarComponent {
+  isLoggedIn!:Boolean;
   constructor(public modalService: NgbModal, private router:Router) { }
-  openModal() {
+  openLoginModal() {
     // this.router.navigate(['/login']);
     
     const modalRef = this.modalService.open(LoginComponent,{
@@ -76,7 +77,7 @@ export class NavBarComponent {
     
     modalRef.result.then((result) => {
       console.log(result);
-      this.modalService.dismissAll();
+      //this.modalService.dismissAll();
       
     }).catch((error) => {
       console.log(error);
@@ -84,8 +85,10 @@ export class NavBarComponent {
     
     
   }
-  
-  openNewModal(){
+  refreshNavBar($event:any){
+    console.log('refresh event after login ', $event);
+  }
+  openSignUpModal(){
     const modalRef = this.modalService.open(RegisterComponent);
     modalRef.result.then((result) => {
       console.log(result);
@@ -96,5 +99,6 @@ export class NavBarComponent {
   }
  
   ngOnInit(): void {
+    this.isLoggedIn = true;
   }
 }

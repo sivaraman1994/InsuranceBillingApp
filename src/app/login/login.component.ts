@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,EventEmitter,Output } from '@angular/core';
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators,NgForm } from "@angular/forms";
 import { BackendApiService } from '../services/backend-api.service';
@@ -16,7 +16,10 @@ export class LoginComponent implements OnInit {
   contactForm!: FormGroup ;
   name!: String;
   password!: String;
-  isUserIdExists!:Boolean;
+  isUserIdMissing!:Boolean;
+  isNotAuthorized!: Boolean;
+  @Output() refreshNavBar = new EventEmitter();
+
   constructor(public formBuilder: FormBuilder,private apiService:BackendApiService
     ,private route:Router,public navCom: NavBarComponent) { }
   
@@ -40,14 +43,29 @@ export class LoginComponent implements OnInit {
       // alert(JSON.stringify(res) +" ____________")
       
        if(res.token){
+        this.isNotAuthorized = false;
+        this.isUserIdMissing = false;
+        localStorage.setItem("userName",res.userName);
+        localStorage.setItem("userToken",res.token);
+        this.navCom.modalService.dismissAll(); 
+        
+        this.refreshNavBar.emit("refresh");
+        this.route.navigate(['/policydetails']);
+        // navigate to policy detail page.
         alert("valid user")
        // this.navCom.modalService.dismissAll();
       //  this.route.navigate(['/'+url]);
       }else alert("invalid");
     },(err)=>{
 
-      console.log("response"+err);
-      this.isUserIdExists = true;
+      if(err && err.error == "User not Authorized") {
+        this.isNotAuthorized = true;
+        this.isUserIdMissing = false;
+      }
+      else if(err && err.error == "User ID does not exist") {
+        this.isUserIdMissing = true;
+        this.isNotAuthorized = false;
+      }
       this.contactForm.setErrors({ unauthenticated: true });
      // this.navCom.modalService.dismissAll();
     })
