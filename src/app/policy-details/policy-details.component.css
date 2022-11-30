@@ -1,9 +1,6 @@
-div.card-header {
-    font-size: large;
-   }
-   
+
    div.card {
      width: 90%;
      height: 450px;
-     margin: 30px auto 30px auto;
+     margin: 30px 30px 30px 30px;
    }

@@ -1,7 +1,6 @@
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { catchError, Observable, tap, throwError } from "rxjs";
-import { Element } from "./policy";
 
 @Injectable({
     providedIn: 'root'
@@ -12,12 +11,9 @@ export class PolicyService{
     constructor(private http:HttpClient)
     {}
 
-   getPolicy(): Observable<Element[]>{
-    return this.http.get<Element[]>(this.policyUrl).pipe(
-        tap(data => console.log('All', JSON.stringify(data))),
-         catchError(this.handleError)
-    );
-   }
+   getPolicy(header:HttpHeaders){
+       return this.http.post('http://localhost:3000/fetchPolicyDetails', {headers: header});
+    }
 
    private handleError(err: HttpErrorResponse){
     //in a real world we may send the server to some remote logging infrastructure
@@ -34,4 +30,5 @@ export class PolicyService{
     console.error(errorMessage);
     return throwError(()=>errorMessage);
    }
+
 }

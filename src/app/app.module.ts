@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpClientInMemoryWebApiModule, InMemoryDbService } from 'angular-in-memory-web-api';
 import {MatInputModule } from '@angular/material/input';
 import {MatTableModule } from '@angular/material/table';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -12,7 +13,6 @@ import { HomeDetailsComponent } from './home/home.component';
 import { NavBarComponent } from './nav/navbar.component';
 import { RegisterComponent } from './register/register.component';
 import { FooterbarComponent } from './footer/footer.component';
-
 import {MatExpansionModule} from '@angular/material/expansion';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';

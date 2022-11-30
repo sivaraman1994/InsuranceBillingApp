@@ -3,7 +3,8 @@
     text-align: center;
 }
 table {
-    width: 100%;
+    width: 90%;
+    margin: auto 25px 30px 65px;
  }
  th.mat-header-cell{
     font-weight:bolder;
