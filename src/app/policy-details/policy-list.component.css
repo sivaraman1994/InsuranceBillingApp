@@ -1,10 +1,12 @@
-thead{
-    color:blue;
-}
+
 .main-header{
     text-align: center;
-
 }
-.card-body{
-    padding: 5px;
-}
+table {
+    width: 100%;
+ }
+ th.mat-header-cell{
+    font-weight:bolder;
+    font-size: medium;
+    color: black;
+ }

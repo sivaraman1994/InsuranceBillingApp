@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { catchError, Observable, tap, throwError } from "rxjs";
-import { IPolicy } from "./policy";
+import { Element } from "./policy";
 
 @Injectable({
     providedIn: 'root'
@@ -12,8 +12,8 @@ export class PolicyService{
     constructor(private http:HttpClient)
     {}
 
-   getPolicy(): Observable<IPolicy[]>{
-    return this.http.get<IPolicy[]>(this.policyUrl).pipe(
+   getPolicy(): Observable<Element[]>{
+    return this.http.get<Element[]>(this.policyUrl).pipe(
         tap(data => console.log('All', JSON.stringify(data))),
          catchError(this.handleError)
     );

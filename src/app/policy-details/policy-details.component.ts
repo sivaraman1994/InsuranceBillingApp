@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IPolicy } from './policy';
+import { Element } from './policy';
 
 @Component({
   selector: 'app-policy-details',
@@ -9,19 +9,19 @@ import { IPolicy } from './policy';
 })
 export class PolicyDetailsComponent implements OnInit {
   pageTitle = "Policy Details";
-  policy : IPolicy | undefined;
+  policy : Element | undefined;
   constructor(private route:ActivatedRoute, private router:Router) { }
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.pageTitle = this.pageTitle + ` ${id}`;
     this.policy = {
-      "policyId": id,
-      "userName": "Chaitali Mane",
-      "policyCode": "GDN-0011",
-      "releaseDate": "March 19, 2021",
-      "description": "Sugar Cosmetics eyeliner is water-proof",
-      "price": 450.3
+      "position": 1,
+      "username": "Chaitali Mane",
+      "policyID": "GDN-0011",
+      "coverage": "March 19, 2021",
+      "premium": 3456,
+      "paymentStatus": "COMPLETED"
   }
 
 }
