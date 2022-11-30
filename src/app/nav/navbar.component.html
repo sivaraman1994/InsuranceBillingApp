@@ -5,11 +5,11 @@
       <a class="nav-item" [routerLink]="['/home']" routerLinkActive="active"
         [routerLinkActiveOptions]="{exact:true}">Home</a>
       <a class="nav-item" [routerLink]="['/policydetails']" routerLinkActive="active"
-        [routerLinkActiveOptions]="{exact:true}">Policy Details</a>
+        [routerLinkActiveOptions]="{exact:true}" style="margin-left: 200px;">Policy Details</a>
       <!-- <a class="nav-item" [routerLink]="['/viewinvoice']" routerLinkActive="active"
         [routerLinkActiveOptions]="{exact:true}">View Invoice/Pay</a> -->
       <a (refreshNavBar)="refreshNavBar($event)" class="nav-item" class="btn btn-primary" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true} "
-        (click)="openLoginModal()">Sign In</a>
+        (click)="openLoginModal()" style="margin-left: 250px;">Sign In</a>
         <u class="nav-item" id="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true} " (click)="openSignUpModal()">New User? Register</u>
     </div>
   </div>

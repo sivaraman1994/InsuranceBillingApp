@@ -17,6 +17,9 @@ export class RegisterComponent implements OnInit {
     fullName!: String;
     email! : String;
     password!: String;
+    isUserExists!: Boolean;
+    isUserSucess!: Boolean;
+
     constructor(public formBuilder: FormBuilder,private apiService:BackendApiService,
       private registerService:RegisterService
       ,private router:Router,public modalService: NgbModal) { }
@@ -30,6 +33,9 @@ export class RegisterComponent implements OnInit {
             password: ['', [Validators.required, Validators.minLength(6)]]
         });
     }
+    cancel(){
+      this.modalService.dismissAll();
+   }
     onSubmit(fullName: String, email: String, password: String){
       console.log("Form submitted with name: "+fullName+", EmailID: "+email+" and password: "+password);
       let userDetails = {
@@ -38,14 +44,15 @@ export class RegisterComponent implements OnInit {
         password:password
       }
       this.registerService.addUser(userDetails).subscribe( (res) => {
-         alert('User Added.')
-         this.modalService.dismissAll();
+        
+         this.isUserSucess=true; 
+         this.isUserExists =false;
       },
         (err) => {
           console.log(err)
+          this.isUserExists =true;
+          this.isUserSucess=false;
       })
   }
-  cancel(){
-     this.modalService.dismissAll();
-  }
+  
 }

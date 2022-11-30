@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-
+import {MatInputModule } from '@angular/material/input';
+import {MatTableModule } from '@angular/material/table';
+import {MatToolbarModule} from '@angular/material/toolbar';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeDetailsComponent } from './home/home.component';
@@ -16,7 +19,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
-import { MatInput, MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule,MatFormFieldControl, MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field'
 import { appRoutes } from './routes';
 import { PolicyDetailsComponent } from './policy-details/policy-details.component';
@@ -32,6 +34,9 @@ import { RegisterService } from './services/register.service';
 
 @NgModule({
   imports: [
+    CommonModule,
+    MatToolbarModule,
+    MatTableModule,
     BrowserModule,
     AppRoutingModule,
     MatExpansionModule,
@@ -54,6 +59,9 @@ import { RegisterService } from './services/register.service';
   ])
 ],
   exports:[
+    CommonModule,
+    MatToolbarModule, 
+    MatInputModule, 
     MatCardModule
   ],
   declarations: [

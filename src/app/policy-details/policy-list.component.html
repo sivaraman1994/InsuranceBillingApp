@@ -1,35 +1,47 @@
-<div>
-    Policy List
+<div class="main-header">
+    <h3>Policy List</h3>
+</div>
     <div class="card-body">
         <div class="row">
             <div class="col-md-6">
                <h4>Filtered By: {{listFilter}}</h4>
             </div>
         </div>
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>SrId</th>
-                        <th>Username</th>
-                        <th>PolicyID</th>
-                        <th>Coverages</th>
-                        <th>Premium</th>
-                        <th>PaymentStatus</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor='let policy of filteredPolicy'>
-                        <td><a>
-                              {{policy.userName}}
-                            </a>
-                        </td>
-                        <td>{{policy.policyCode}}</td>
-                        <td>{{policy.releaseDate}}</td>
-                        <td>{{policy.price}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
     </div>
-</div>
+            <table mat-table [dataSource]="dataSource">
+
+                <ng-container matColumnDef="position">
+                    <th mat-header-cell *matHeaderCellDef> No. </th>
+                    <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="userName">
+                    <th *matHeaderCellDef> UserName </th>
+                    <td *matCellDef="let element"> {{element.userName}} </td>
+                </ng-container>  
+
+                <ng-container matColumnDef="policyID">
+                    <th *matHeaderCellDef> PolicyID </th>
+                    <td *matCellDef="let element"> {{element.policyID}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="coverage">
+                    <th *matHeaderCellDef> Coverage </th>
+                    <td *matCellDef="let element"> {{element.coverage}} </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="premium">
+                    <th *matHeaderCellDef> Premium </th>
+                    <td *matCellDef="let element"> {{element.premium}} </td>
+                  </ng-container>
+                
+                  <ng-container matColumnDef="paymentStatus">
+                    <th *matHeaderCellDef> PaymentStatus </th>
+                    <td *matCellDef="let element"> {{element.paymentStatus}} </td>
+                  </ng-container>
+              
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+        
