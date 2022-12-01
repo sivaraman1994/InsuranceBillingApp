@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { catchError, Observable, tap, throwError } from "rxjs";
+import { catchError, map, Observable, tap, throwError } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -11,9 +11,25 @@ export class PolicyService{
     constructor(private http:HttpClient)
     {}
 
-   getPolicy(header:HttpHeaders){
-       return this.http.post('http://localhost:3000/fetchPolicyDetails', {headers: header});
-    }
+     httpOptions = {
+
+        headers: new HttpHeaders({
+   
+         'Content-Type':  'application/json',
+   
+         'Authorization':  'token'
+   
+        })};
+
+   getPolicy(headers: HttpHeaders): Observable<any> {
+
+    const Url = `${'http://localhost:3000/fetchPolicyDetails'}`;
+
+    return this.http.get<any>(Url, { headers: headers })
+
+    .pipe(map(res => res))
+
+   }
 
    private handleError(err: HttpErrorResponse){
     //in a real world we may send the server to some remote logging infrastructure

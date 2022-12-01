@@ -1,9 +1,9 @@
 export interface Element {
-    position: number;
-    username:string;
     policyID: string;
-    coverage:string;
-    premium: number;
+    policyName: string;
+    country: string;
+    policyCoverage:number;
+    policyPremium: number;
     paymentStatus:string;
 
 }
