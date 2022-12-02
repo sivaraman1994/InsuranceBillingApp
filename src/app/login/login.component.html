@@ -45,7 +45,9 @@
     <mat-card class="quiz">
       <mat-card-content>
         <form [formGroup]="contactForm" (submit)="onSubmit(name,password)">
-       
+          <div *ngIf="isUnkownError == true">
+            Unknown Error. Kindly login after some time.
+          </div>
       <div *ngIf="isNotAuthorized == true">
         Password incorrect. Plese enter valid password.
       </div>
@@ -66,7 +68,7 @@
           </mat-error>
           <mat-form-field class="full-width">
             <mat-label>Password</mat-label>
-            <input matInput name="password" [(ngModel)]="password" formControlName="password">
+            <input matInput name="password" [(ngModel)]="password" type = "password" formControlName="password">
           </mat-form-field>
           <mat-error
             *ngIf="(contactForm.get('password')?.touched||contactForm.get('password')?.dirty) && contactForm.get('password')?.hasError('required')">

@@ -7,6 +7,7 @@ import { PolicyListComponent } from './policy-details/policy-list.component'
 
 export const appRoutes: Routes = [
   { path: 'home', component: HomeDetailsComponent },
+  { path: '', component: HomeDetailsComponent },
   { path: 'policydetails', component: PolicyListComponent},
   { path: 'viewinvoice', component: ViewInvoiceComponent },
   { path: 'login', component: LoginComponent }

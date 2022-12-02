@@ -22,7 +22,7 @@ export class RegisterService {
      }
     
     addUser(data:any): Observable<any>{
-       return this._http.post("http://localhost:3000/registerUser", data).pipe(catchError(this.errmanage))
+       return this._http.post("http://localhost:4000/registerUser", data).pipe(catchError(this.errmanage))
     }
     
     

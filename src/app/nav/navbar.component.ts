@@ -1,15 +1,15 @@
 import { Component } from '@angular/core'
 import { LoginComponent } from '../login/login.component'
-import { MatDialog } from  '@angular/material/dialog';
-import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {  Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 import { RegisterComponent } from '../register/register.component';
 
 
 @Component({
   selector: 'nav-bar',
   templateUrl: './navbar.component.html',
-  styles:[ `
+  styles: [`
   header#myHeader {
     box-shadow: 20px -30px 35px 15px grey;
     top: 0;
@@ -25,7 +25,13 @@ import { RegisterComponent } from '../register/register.component';
     display: inline-block;
     margin-right: 5% !important;
  }
-
+.isDisabled {
+  color: currentColor;
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.5;
+  text-decoration: none;
+}
  .flex{
     margin: 10px 10px 0 10px;
     display:flex;
@@ -64,41 +70,59 @@ import { RegisterComponent } from '../register/register.component';
 })
 
 export class NavBarComponent {
-  isLoggedIn!:Boolean;
-  constructor(public modalService: NgbModal, private router:Router) { }
+  isLoggedIn: Boolean = false;
+  userName:string ="" ;
+  constructor(public modalService: NgbModal, private router: Router) { }
   openLoginModal() {
     // this.router.navigate(['/login']);
-    
-    const modalRef = this.modalService.open(LoginComponent,{
+
+    const modalRef = this.modalService.open(LoginComponent, {
       backdrop: false,
       keyboard: true,
-      size:'xxlg',
+      size: 'xxlg',
     });
-    
+
     modalRef.result.then((result) => {
       console.log(result);
       //this.modalService.dismissAll();
-      
+
     }).catch((error) => {
       console.log(error);
     });
-    
-    
+
+
   }
-  refreshNavBar($event:any){
+  refreshNavBar($event: any) {
     console.log('refresh event after login ', $event);
   }
-  openSignUpModal(){
+  openSignUpModal() {
     const modalRef = this.modalService.open(RegisterComponent);
     modalRef.result.then((result) => {
       console.log(result);
-      
+
     }).catch((error) => {
       console.log(error);
     });
   }
- 
+
   ngOnInit(): void {
-    this.isLoggedIn = true;
+    // alert(localStorage.getItem('userName'));
+    let name = localStorage.getItem('userName');
+    if (name != null) {
+      this.isLoggedIn = true;
+      this.userName = name;
+    } else {
+      this.isLoggedIn = false;
+    }
+
   }
+  logoff() {
+    
+    this.router.navigate(['/']);
+    localStorage.clear();
+  }
+  doSomething(event:any)
+    { 
+      alert("event received");
+    }
 }

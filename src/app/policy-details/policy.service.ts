@@ -23,7 +23,7 @@ export class PolicyService{
 
    getPolicy(headers: HttpHeaders): Observable<any> {
 
-    const Url = `${'http://localhost:3000/fetchPolicyDetails'}`;
+    const Url = `${'http://localhost:4000/fetchPolicyDetails'}`;
 
     return this.http.get<any>(Url, { headers: headers })
 
