@@ -32,6 +32,10 @@ import { RegisterComponent } from '../register/register.component';
   opacity: 0.5;
   text-decoration: none;
 }
+#username{
+  text-decoration: none;
+}
+
  .flex{
     margin: 10px 10px 0 10px;
     display:flex;
