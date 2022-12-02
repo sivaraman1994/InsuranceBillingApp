@@ -4,30 +4,26 @@
 </div>
             <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
                 
-                <!-- <ng-container matColumnDef="username">
-                    <th mat-header-cell *matHeaderCellDef> UserName </th>
-                    <td mat-cell *matCellDef="let element"> {{element.username}} </td>
-                </ng-container>   -->
                 
                 <ng-container matColumnDef="policyID">
                     <th mat-header-cell *matHeaderCellDef> PolicyID </th>
                     <td mat-cell *matCellDef="let element"> {{element.policyID}} </td>
                 </ng-container>
 
-        <ng-container matColumnDef="policyName">
-            <th mat-header-cell *matHeaderCellDef> PolicyName </th>
-            <td mat-cell *matCellDef="let element"> {{element.policyName}} </td>
-        </ng-container>
+                <ng-container matColumnDef="policyName">
+                    <th mat-header-cell *matHeaderCellDef> PolicyName </th>
+                    <td mat-cell *matCellDef="let element"> {{element.policyName}} </td>
+                </ng-container>
 
-        <!-- <ng-container matColumnDef="userName">
-            <th mat-header-cell *matHeaderCellDef> UserName </th>
-            <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
-        </ng-container> -->
+                <ng-container matColumnDef="userName">
+                    <th mat-header-cell *matHeaderCellDef> UserName </th>
+                    <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
+                </ng-container>
 
-        <ng-container matColumnDef="country">
-            <th mat-header-cell *matHeaderCellDef> Country </th>
-            <td mat-cell *matCellDef="let element"> {{element.country}} </td>
-        </ng-container>
+                <ng-container matColumnDef="country">
+                    <th mat-header-cell *matHeaderCellDef> Country </th>
+                    <td mat-cell *matCellDef="let element"> {{element.country}} </td>
+                </ng-container>
 
                 <ng-container matColumnDef="policyCoverage">
                     <th mat-header-cell *matHeaderCellDef> PolicyCoverage </th>
@@ -39,10 +35,10 @@
                     <td mat-cell *matCellDef="let element"> {{element.policyPremium}} </td>
                   </ng-container>
                 
-                  <ng-container matColumnDef="paymentStatus">
+                 <ng-container matColumnDef="paymentStatus">
                     <th mat-header-cell *matHeaderCellDef> PaymentStatus </th>
                     <td mat-cell *matCellDef="let element"> {{element.paymentStatus}} </td>
-                  </ng-container>
+                 </ng-container>
               
                   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
