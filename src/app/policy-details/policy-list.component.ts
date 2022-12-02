@@ -36,7 +36,7 @@ export class PolicyListComponent implements OnInit {
         if(usertoken!==null){
         headers = headers.set('token', usertoken );
         this.sub = this.productService.getPolicy(headers).subscribe((dataResponse) => {
-          this.dataSource = dataResponse.policyData;
+          this.dataSource = dataResponse;
           });
       }
         }
