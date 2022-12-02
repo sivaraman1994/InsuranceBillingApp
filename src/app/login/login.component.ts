@@ -12,18 +12,21 @@ import { NavBarComponent } from '../nav/navbar.component';
   styleUrls: ['./login.component.scss'],
   
 })
+
 export class LoginComponent implements OnInit {
   contactForm!: FormGroup ;
   name!: String;
   password!: String;
-  isUserIdMissing!:Boolean;
-  isNotAuthorized!: Boolean;
+  isUserIdMissing:Boolean = false;
+  isNotAuthorized: Boolean = false;
+  isUnkownError: Boolean = false;
   @Output() refreshNavBar = new EventEmitter();
 
   constructor(public formBuilder: FormBuilder,private apiService:BackendApiService
     ,private route:Router,public navCom: NavBarComponent) { }
-  
+
   ngOnInit(){
+    this.route.navigate(['/home']);
     this.contactForm = this.formBuilder.group({
       name: ['',[Validators.required,Validators.minLength(3)]],
       password: ['',[Validators.required, Validators.minLength(3)]]
@@ -43,16 +46,14 @@ export class LoginComponent implements OnInit {
       // alert(JSON.stringify(res) +" ____________")
       
        if(res.token){
-        this.isNotAuthorized = false;
-        this.isUserIdMissing = false;
-        localStorage.setItem("userName",res.userName);
+       localStorage.setItem("userName",res.userName);
         localStorage.setItem("userToken",res.token);
         this.navCom.modalService.dismissAll(); 
         
         this.refreshNavBar.emit("refresh");
         this.route.navigate(['/policydetails']);
         // navigate to policy detail page.
-        alert("valid user")
+        // alert("valid user")
        // this.navCom.modalService.dismissAll();
       //  this.route.navigate(['/'+url]);
       }else alert("invalid");
@@ -60,11 +61,11 @@ export class LoginComponent implements OnInit {
 
       if(err && err.error == "User not Authorized") {
         this.isNotAuthorized = true;
-        this.isUserIdMissing = false;
       }
       else if(err && err.error == "User ID does not exist") {
         this.isUserIdMissing = true;
-        this.isNotAuthorized = false;
+      }else{
+        this.isUnkownError = true;
       }
       this.contactForm.setErrors({ unauthenticated: true });
      // this.navCom.modalService.dismissAll();

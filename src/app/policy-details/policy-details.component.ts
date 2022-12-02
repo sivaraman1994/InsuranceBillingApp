@@ -1,10 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-policy-details',
   templateUrl: './policy-details.component.html',
   styleUrls: ['./policy-details.component.css']
 })
-export class PolicyDetailsComponent{
+export class PolicyDetailsComponent implements OnInit{
+  ngOnInit(): void {
+   
+  }
+
   
 }
