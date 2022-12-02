@@ -38,6 +38,7 @@ export class PolicyListComponent implements OnInit {
         this.sub = this.productService.getPolicy(headers).subscribe((dataResponse) => {
           this.dataSource = dataResponse;
           });
+          window.location.reload();
       }
         }
 }
