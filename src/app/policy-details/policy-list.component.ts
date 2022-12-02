@@ -21,7 +21,7 @@ export class PolicyListComponent implements OnInit {
   sub!: Subscription;
   isLoggedIn:Boolean = false;
   
-  displayedColumns:String[] = ['policyID', 'policyName', 'country', 'policyCoverage', 'policyPremium', 'paymentStatus'];
+  displayedColumns:String[] = ['policyID', 'policyName', 'userName', 'country', 'policyCoverage', 'policyPremium', 'paymentStatus'];
   dataSource = new MatTableDataSource();
 
   private _listFilter: string = '';
@@ -44,7 +44,7 @@ export class PolicyListComponent implements OnInit {
       headers = headers.set('token', usertoken);
       this.sub = this.productService.getPolicy(headers).subscribe((dataResponse) => {
         console.log(JSON.stringify(dataResponse.policyData));
-        this.dataSource = dataResponse.policyData;
+        this.dataSource = dataResponse;
       });
      // window.location.reload();
     }  
