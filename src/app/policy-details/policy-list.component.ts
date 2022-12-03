@@ -21,7 +21,7 @@ export class PolicyListComponent implements OnInit {
   sub!: Subscription;
   isLoggedIn:Boolean = false;
   
-  displayedColumns:String[] = ['policyID', 'policyName', 'userName', 'country', 'policyCoverage', 'policyPremium', 'paymentStatus'];
+  displayedColumns:String[] = ['policyID', 'policyName', 'userName', 'country', 'policyCoverage', 'policyPremium', 'paymentStatus', 'action'];
   dataSource = new MatTableDataSource();
 
   private _listFilter: string = '';
