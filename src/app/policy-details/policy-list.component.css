@@ -12,3 +12,7 @@ table {
     font-size: medium;
     color: black;
  }
+ .mat-raised-button{
+    background-color: red;
+    margin: 5px;
+ }
