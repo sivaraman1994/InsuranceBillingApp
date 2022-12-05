@@ -24,12 +24,14 @@ export class PolicyListComponent implements OnInit {
   displayedColumns:String[] = ['policyID', 'policyName', 'userName', 'country', 'policyCoverage', 'policyPremium', 'paymentStatus', 'actions'];
   dataSource = new MatTableDataSource();
 
-  private _listFilter: string = '';
-
+  private _listFilter = '';
   get listFilter(): string {
     return this._listFilter;
   }
-
+  set listFilter(value: string) {
+    this._listFilter = value;
+  //  this.filteredPolicy = this.performFilter(value);
+  }
   filteredPolicy: Element[] = [];
 
   policy: Element[] = [];

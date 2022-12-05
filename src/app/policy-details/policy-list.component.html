@@ -2,6 +2,10 @@
 <div class="main-header">
     <h3>Policy List</h3><br>
 </div>
+<div class='col-md-6'>Search:
+        <input class="col-md-4" type='text'
+               [(ngModel)]='listFilter' />
+      </div>
             <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
                 
                 
