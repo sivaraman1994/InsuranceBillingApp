@@ -2,11 +2,13 @@
 <div class="main-header">
     <h3>Policy List</h3><br>
 </div>
-<div class='col-md-6'>Search:
+<div *ngIf = "isLoggedIn != true" class ="data-notfound-error"> Data Not Found !!! Please Login to view the details</div>
+
+<div *ngIf = "isLoggedIn == true " class='col-md-6'>Search:
         <input class="col-md-4" type='text'
                [(ngModel)]='listFilter' />
       </div>
-            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <table  *ngIf = "isLoggedIn == true " mat-table [dataSource]="dataSource" class="mat-elevation-z8">
                 
                 
                 <ng-container matColumnDef="policyID">
@@ -55,4 +57,5 @@
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
+            <div *ngIf = "isLoggedIn == true && noDataFound == true" class ="data-notfound-error"> Data Not Found !!! Please work with user to create policy</div>
       

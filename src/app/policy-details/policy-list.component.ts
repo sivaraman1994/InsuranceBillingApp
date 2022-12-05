@@ -20,6 +20,7 @@ export class PolicyListComponent implements OnInit {
   errorMessage = '';
   sub!: Subscription;
   isLoggedIn:Boolean = false;
+  noDataFound:Boolean = false;
   
   displayedColumns:String[] = ['policyID', 'policyName', 'userName', 'country', 'policyCoverage', 'policyPremium', 'paymentStatus', 'actions'];
   dataSource = new MatTableDataSource();
@@ -45,8 +46,11 @@ export class PolicyListComponent implements OnInit {
       this.isLoggedIn = true;
       headers = headers.set('token', usertoken);
       this.sub = this.productService.getPolicy(headers).subscribe((dataResponse) => {
-        console.log(JSON.stringify(dataResponse.policyData));
+        console.log(JSON.stringify(dataResponse));
         this.dataSource = dataResponse;
+        if(dataResponse == null){
+          this.noDataFound= true;
+        }
       });
      // window.location.reload();
     }  

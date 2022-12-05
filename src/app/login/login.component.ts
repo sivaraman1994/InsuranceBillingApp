@@ -61,9 +61,13 @@ export class LoginComponent implements OnInit {
 
       if(err && err.error == "User not Authorized") {
         this.isNotAuthorized = true;
+        this.isUnkownError = false;
+        this.isUserIdMissing = false;
       }
       else if(err && err.error == "User ID does not exist") {
+        this.isNotAuthorized = false;
         this.isUserIdMissing = true;
+        this.isUnkownError = false;
       }else{
         this.isUnkownError = true;
       }

@@ -22,3 +22,9 @@ table {
     background-color: red;
     margin: 5px;
  }
+ .data-notfound-error{
+   font-weight:bolder;
+   font-size: larger;
+   color: red;
+   text-align: center
+ }
