@@ -52,7 +52,7 @@
         Password incorrect. Plese enter valid password.
       </div>
       <div *ngIf="isUserIdMissing == true">
-        User ID does not exist. Click Cancel and Navigate to Sign Up page.
+        User ID does not exist.  <a class = "naviagate-signUp" (click)="openSignUpModal()">Click here </a>and Navigate to Sign Up page.
       </div>
           <mat-form-field class="full-width">
             <mat-label>Email</mat-label>
