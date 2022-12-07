@@ -3,10 +3,10 @@
   <div class="container">
     <h4>Sign Up</h4>
     <div *ngIf="isUserExists">
-      User ID already exists. Please login with user ID.<br>
+      User ID already exists. Please <a class = "naviagate-signIn" (click)="openLoginModal()">Login</a><br>
     </div>
     <div *ngIf="isUserSucess">
-     User is successfully created.Please close the modal and login.<br>
+     User is successfully created. Please <a class = "naviagate-signIn" (click)="openLoginModal()">Login</a><br>
     </div>
     <br><label for="fname"><b>Full Name</b></label>
     <input type="text" placeholder="Full Name" [(ngModel)]="fullName" formControlName="fullName"/>

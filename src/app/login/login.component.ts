@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators,NgForm } from "@angular/forms";
 import { BackendApiService } from '../services/backend-api.service';
 import { Route, Router } from '@angular/router';
 import { NavBarComponent } from '../nav/navbar.component';
+import { RegisterComponent } from '../register/register.component';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit {
   @Output() refreshNavBar = new EventEmitter();
 
   constructor(public formBuilder: FormBuilder,private apiService:BackendApiService
-    ,private route:Router,public navCom: NavBarComponent) { }
+    ,private route:Router,public navCom: NavBarComponent,public modalService: NgbModal) { }
 
   ngOnInit(){
     this.route.navigate(['/home']);
@@ -61,9 +62,13 @@ export class LoginComponent implements OnInit {
 
       if(err && err.error == "User not Authorized") {
         this.isNotAuthorized = true;
+        this.isUnkownError = false;
+        this.isUserIdMissing = false;
       }
       else if(err && err.error == "User ID does not exist") {
+        this.isNotAuthorized = false;
         this.isUserIdMissing = true;
+        this.isUnkownError = false;
       }else{
         this.isUnkownError = true;
       }
@@ -71,5 +76,13 @@ export class LoginComponent implements OnInit {
      // this.navCom.modalService.dismissAll();
     })
   }
+  openSignUpModal() {
+    const modalRef = this.modalService.open(RegisterComponent);
+    modalRef.result.then((result) => {
+      console.log(result);
 
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
 }

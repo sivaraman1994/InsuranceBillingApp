@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, NgModule } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LoginComponent } from '../login/login.component';
 import { BackendApiService } from '../services/backend-api.service';
 import { RegisterService } from '../services/register.service';
 
@@ -53,6 +54,16 @@ export class RegisterComponent implements OnInit {
           this.isUserExists =true;
           this.isUserSucess=false;
       })
+  }
+  openLoginModal() {
+    // this.router.navigate(['/login']);
+
+    this.modalService.dismissAll();
+    const modalRef = this.modalService.open(LoginComponent, {
+      backdrop: false,
+      keyboard: true,
+      size: 'xxlg',
+    });
   }
   
 }
