@@ -77,6 +77,7 @@ export class LoginComponent implements OnInit {
     })
   }
   openSignUpModal() {
+    this.modalService.dismissAll();
     const modalRef = this.modalService.open(RegisterComponent);
     modalRef.result.then((result) => {
       console.log(result);
