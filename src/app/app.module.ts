@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
+import { FilterPipe } from '../app/policy-details/filter.pipe';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule, InMemoryDbService } from 'angular-in-memory-web-api';
@@ -61,6 +62,7 @@ import { RegisterService } from './services/register.service';
   exports:[
     CommonModule,
     MatToolbarModule, 
+    MatFormFieldModule,
     MatInputModule, 
     MatCardModule
   ],
@@ -74,7 +76,8 @@ import { RegisterService } from './services/register.service';
     PolicyDetailsComponent,
     convertToSpacesPipe,
     ViewInvoiceComponent,
-    LoginComponent
+    LoginComponent,
+    FilterPipe
   ],
   providers:  [BackendApiService, NavBarComponent,[{provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'legacy'}}],
   [{provide: MatFormFieldControl}],

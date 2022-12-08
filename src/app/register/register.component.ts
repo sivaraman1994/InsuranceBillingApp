@@ -56,8 +56,6 @@ export class RegisterComponent implements OnInit {
       })
   }
   openLoginModal() {
-    // this.router.navigate(['/login']);
-
     this.modalService.dismissAll();
     const modalRef = this.modalService.open(LoginComponent, {
       backdrop: false,
