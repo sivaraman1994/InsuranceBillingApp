@@ -16,7 +16,7 @@ import { Component } from '@angular/core'
     margin-bottom: 0px;
     overflow: hidden;
     position: absolute;
-    width: 95.3%;
+    width: 99.3%;
     bottom: 0;
    }
 
