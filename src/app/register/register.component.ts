@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, NgModule } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LoginComponent } from '../login/login.component';
 import { BackendApiService } from '../services/backend-api.service';
 import { RegisterService } from '../services/register.service';
 
