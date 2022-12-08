@@ -8,17 +8,22 @@
     <div *ngIf="isUserSucess">
      User is successfully created. Please <a class = "naviagate-signIn" (click)="openLoginModal()">Login</a><br>
     </div>
-    <br><label for="fname"><b>Full Name</b></label>
-    <input type="text" placeholder="Full Name" [(ngModel)]="fullName" formControlName="fullName"/>
+
+    <mat-form-field class="full-width">
+    <br><mat-label for="fname">Full Name</mat-label>
+    <input matInput type="text" placeholder="Full Name" [(ngModel)]="fullName" formControlName="fullName"/>
+  </mat-form-field>
     <mat-error *ngIf="(registerForm.get('fullName')?.touched||registerForm.get('fullName')?.dirty) && registerForm.get('fullName')?.hasError('required')">
       Name is Required!
     </mat-error><br>
     <mat-error *ngIf="(registerForm.get('fullName')?.touched||registerForm.get('fullName')?.dirty) && registerForm.get('fullName')?.hasError('minlength')">
       Name should be atleast 3 characters long!!
     </mat-error><br>
-
-    <label for="email"><b>Email Address: </b></label>
-    <input type="text" placeholder="Enter Email" [(ngModel)]="email" formControlName="email"/>
+    
+    <mat-form-field class="full-width">
+    <mat-label  for="email">Email Address:</mat-label>
+    <input matInput type="text" placeholder="Enter Email" [(ngModel)]="email" formControlName="email"/>
+    </mat-form-field>
     <mat-error *ngIf="(registerForm.get('email')?.touched||registerForm.get('email')?.dirty) && registerForm.get('email')?.hasError('required')">
       Email is Required!
     </mat-error><br>
@@ -26,8 +31,10 @@
       Please enter a valid email address!
     </mat-error><br>
 
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" [(ngModel)]="password" formControlName="password"/>
+    <mat-form-field class="full-width">
+    <mat-label for="psw">Password</mat-label>
+    <input matInput type="password" placeholder="Enter Password" [(ngModel)]="password" formControlName="password"/>
+    </mat-form-field>
     <mat-error *ngIf="(registerForm.get('password')?.touched||registerForm.get('password')?.dirty) && registerForm.get('password')?.hasError('required')">
       Password is Required!
     </mat-error>
