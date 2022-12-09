@@ -2,10 +2,10 @@
   
   <div class="container">
     <h4>Sign Up</h4>
-    <div *ngIf="isUserExists">
+    <div class="exists" *ngIf="isUserExists">
       User ID already exists. Please <a class = "naviagate-signIn" (click)="openLoginModal()">Login</a><br>
     </div>
-    <div *ngIf="isUserSucess">
+    <div class="success" *ngIf="isUserSucess">
      User is successfully created. Please <a class = "naviagate-signIn" (click)="openLoginModal()">Login</a><br>
     </div>
 
