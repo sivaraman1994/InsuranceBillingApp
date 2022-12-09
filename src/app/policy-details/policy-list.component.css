@@ -33,6 +33,13 @@ table {
  .delete{
    background-color: red;
  }
+
+ th.actions{
+   text-align: center;
+ }
+ td.mat-cell{
+   padding-right: 30px;
+ }
  .data-notfound-error{
    margin-bottom: 10px;
    font-weight:bolder;
