@@ -2,6 +2,7 @@ import { DataSource} from "@angular/cdk/collections";
 import { HttpHeaders } from "@angular/common/http";
 import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
+import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from '@angular/material/table';
 import { TooltipTouchGestures } from "@angular/material/tooltip";
 import { Router } from "@angular/router";
@@ -26,6 +27,7 @@ export class PolicyListComponent implements OnInit {
   displayedColumns:String[] = ['policyID', 'policyName', 'userName', 'country', 'policyCoverage', 'policyPremium', 'paymentStatus', 'actions'];
   dataSource!: MatTableDataSource<Element>;
   @ViewChild(MatPaginator) paginator!: MatPaginator
+  @ViewChild(MatSort) sort!: MatSort
   posts:any;
 
    constructor(private productService: PolicyService, public router: Router, public navCom: NavBarComponent) { }
@@ -48,7 +50,8 @@ export class PolicyListComponent implements OnInit {
         this.posts = dataResponse;
         this.dataSource = new MatTableDataSource(this.posts);
         // this.dataSource = dataResponse;
-        // this.dataSource.paginator = this.paginator;
+         this.dataSource.paginator = this.paginator;
+         this.dataSource.sort = this.sort;
         // this.dataSource.filterPredicate = (data:posts, filter: string) => {
         //   return posts.userName == filter;
         //   console.log("filtered value2:"+data.userName)
