@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
+import { FilterPipe } from '../app/policy-details/filter.pipe';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule, InMemoryDbService } from 'angular-in-memory-web-api';
@@ -30,6 +31,8 @@ import { BackendApiService } from './services/backend-api.service';
 import { PolicyListComponent } from './policy-details/policy-list.component';
 import { convertToSpacesPipe } from './policy-details/convert-to-space.pipe';
 import { RegisterService } from './services/register.service';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 
 @NgModule({
@@ -48,6 +51,8 @@ import { RegisterService } from './services/register.service';
     MatFormFieldModule,
     MatButtonModule,
     NgbModule,
+    MatPaginatorModule,
+    MatSortModule,
     FormsModule,
     MatInputModule,
     ReactiveFormsModule,
@@ -61,6 +66,7 @@ import { RegisterService } from './services/register.service';
   exports:[
     CommonModule,
     MatToolbarModule, 
+    MatFormFieldModule,
     MatInputModule, 
     MatCardModule
   ],
@@ -74,7 +80,8 @@ import { RegisterService } from './services/register.service';
     PolicyDetailsComponent,
     convertToSpacesPipe,
     ViewInvoiceComponent,
-    LoginComponent
+    LoginComponent,
+    FilterPipe
   ],
   providers:  [BackendApiService, NavBarComponent,[{provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'legacy'}}],
   [{provide: MatFormFieldControl}],
