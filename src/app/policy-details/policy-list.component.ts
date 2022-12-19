@@ -25,7 +25,7 @@ export class PolicyListComponent implements OnInit {
   del!: Subscription;
   isLoggedIn:Boolean = false;
   noDataFound:Boolean = false;
-  displayedColumns:any[] = ['policyID', 'policyName', 'userName', 'country', 'policyCoverage', 'policyPremium', 'paymentStatus', 'actions'];
+  displayedColumns:String[] = ['policyID', 'policyName', 'userName', 'country', 'policyCoverage', 'policyPremium', 'paymentStatus', 'actions'];
   dataSource!: MatTableDataSource<Element>;
   @ViewChild(MatPaginator) paginator!: MatPaginator
   @ViewChild(MatSort) sort!: MatSort
