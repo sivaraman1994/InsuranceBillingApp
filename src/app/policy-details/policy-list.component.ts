@@ -22,7 +22,6 @@ import { PolicyService } from "./policy.service";
 export class PolicyListComponent implements OnInit {
   errorMessage = '';
   sub!: Subscription;
-  del!: Subscription;
   isLoggedIn:Boolean = false;
   noDataFound:Boolean = false;
   displayedColumns:String[] = ['policyID', 'policyName', 'userName', 'country', 'policyCoverage', 'policyPremium', 'paymentStatus', 'actions'];
@@ -39,35 +38,41 @@ export class PolicyListComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLocaleLowerCase();
     console.log("filtered value:"+this.dataSource.filter)
   }
+
   ngOnInit(): void {
-    let headers = new HttpHeaders();
-    let usertoken = localStorage.getItem("userToken");
-    if (usertoken !== null) {
-      this.isLoggedIn = true;
-      headers = headers.set('token', usertoken);
-      this.sub = this.productService.getPolicy(headers).subscribe((dataResponse) => {
-        console.log(JSON.stringify(dataResponse));
-        this.posts = dataResponse;
-        this.dataSource = new MatTableDataSource(this.posts);
-         this.dataSource.paginator = this.paginator;
-         this.dataSource.sort = this.sort;       
-         if(dataResponse == null || []){
-            this.noDataFound= true;
-              }
-      });
-    }  
+      this.getPolicy();
   }
+
   deletePolicy(element:any){
     let headers = new HttpHeaders();
     let usertoken = localStorage.getItem("userToken");
     if (usertoken !== null) {
       this.isLoggedIn = true;
       headers = headers.set('token', usertoken);
-      this.del= this.productService.deletePolicy(element,headers).subscribe( (res)=> {
+      this.productService.deletePolicy(element,headers).subscribe( (res)=> {
       console.log(res);
-      this.ngOnInit();
+      this.getPolicy();
       
    });
   }
+}
+
+getPolicy():void{
+  let headers = new HttpHeaders();
+  let usertoken = localStorage.getItem("userToken");
+  if (usertoken !== null) {
+    this.isLoggedIn = true;
+    headers = headers.set('token', usertoken);
+    this.sub = this.productService.getPolicy(headers).subscribe((dataResponse) => {
+      console.log(JSON.stringify(dataResponse));
+      this.posts = dataResponse;
+      this.dataSource = new MatTableDataSource(this.posts);
+       this.dataSource.paginator = this.paginator;
+       this.dataSource.sort = this.sort;       
+       if(dataResponse == null || (Array.isArray(dataResponse) && dataResponse.length == 0)){
+          this.noDataFound= true;
+            }
+    });
+  }  
 }
 }

@@ -30,14 +30,14 @@ export class PolicyService{
 
    }
 
-  deletePolicy(element:any,headers: HttpHeaders){
+  deletePolicy({policyID, policyCoverage, policyPremium, paymentStatus}:any,headers: HttpHeaders){
      const url = `${'http://localhost:3000/updatePolicy'}`;
      let policyupdate = {
         policyData: {
-            policyID: String = element.policyID,
-            policyCoverage: Number = element.policyCoverage,
-            policyPremium: Number = element.policyPremium,
-            paymentStatus: String = element.paymentStatus,
+            policyID,
+            policyCoverage,
+            policyPremium,
+            paymentStatus,
             isActive: false
     }
 }
