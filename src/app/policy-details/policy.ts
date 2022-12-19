@@ -1,10 +1,10 @@
 export interface Element {
-    policyID: string;
-    policyName: string;
-    userName: string;
-    country: string;
-    policyCoverage:number;
-    policyPremium: number;
-    paymentStatus:string;
+    policyID: String;
+    policyName: String;
+    userName: String;
+    country: String;
+    policyCoverage:Number;
+    policyPremium: Number;
+    paymentStatus:String;
 
 }

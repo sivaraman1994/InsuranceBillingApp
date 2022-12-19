@@ -55,13 +55,13 @@ export class RegisterComponent implements OnInit {
           this.isUserSucess=false;
       })
   }
-  openLoginModal() {
-    this.modalService.dismissAll();
-    const modalRef = this.modalService.open(LoginComponent, {
-      backdrop: false,
-      keyboard: true,
-      size: 'xxlg',
-    });
-  }
+    openLoginModal() {
+        this.modalService.dismissAll();
+        const modalRef = this.modalService.open(LoginComponent, {
+          backdrop: false,
+          keyboard: true,
+          size: 'xxlg',
+        });
+      }
   
 }

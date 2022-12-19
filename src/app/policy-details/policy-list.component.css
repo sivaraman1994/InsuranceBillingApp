@@ -15,14 +15,30 @@ table {
     width: 90%;
     margin: auto 25px 30px 65px;
  }
+ .mat-elevation-z8{
+   align-items: center;
+ }
  th.mat-header-cell{
     font-weight:bolder;
     font-size: medium;
     color: black;
+    padding: 1px;
  }
  .mat-raised-button{
-    background-color: red;
     margin: 5px;
+ }
+ .edit{
+   background-color: green;
+ }
+ .delete{
+   background-color: red;
+ }
+
+ th.actions{
+   text-align: center;
+ }
+ td.mat-cell{
+   padding-right: 30px;
  }
  .data-notfound-error{
    margin-bottom: 10px;
@@ -30,5 +46,4 @@ table {
    font-size: larger;
    color: red;
    text-align: center;
-  
- }
+  }

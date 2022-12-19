@@ -31,6 +31,8 @@ import { BackendApiService } from './services/backend-api.service';
 import { PolicyListComponent } from './policy-details/policy-list.component';
 import { convertToSpacesPipe } from './policy-details/convert-to-space.pipe';
 import { RegisterService } from './services/register.service';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 
 @NgModule({
@@ -49,6 +51,8 @@ import { RegisterService } from './services/register.service';
     MatFormFieldModule,
     MatButtonModule,
     NgbModule,
+    MatPaginatorModule,
+    MatSortModule,
     FormsModule,
     MatInputModule,
     ReactiveFormsModule,

@@ -7,6 +7,7 @@ import { catchError, map, Observable, tap, throwError } from "rxjs";
 })
 export class PolicyService{
     private policyUrl = 'api/policy/policy.json';
+    url: any;
 
     constructor(private http:HttpClient)
     {}
@@ -27,9 +28,21 @@ export class PolicyService{
 
     return this.http.get<any>(Url, { headers: headers })
 
-    .pipe(map(res => res))
-
    }
+
+  deletePolicy(element:any,headers: HttpHeaders){
+     const url = `${'http://localhost:3000/updatePolicy'}`;
+     let policyupdate = {
+        policyData: {
+            policyID: String = element.policyID,
+            policyCoverage: Number = element.policyCoverage,
+            policyPremium: Number = element.policyPremium,
+            paymentStatus: String = element.paymentStatus,
+            isActive: false
+    }
+}
+     return this.http.post<any>(url,  policyupdate, { headers: headers })
+    }
 
    private handleError(err: HttpErrorResponse){
     //in a real world we may send the server to some remote logging infrastructure
