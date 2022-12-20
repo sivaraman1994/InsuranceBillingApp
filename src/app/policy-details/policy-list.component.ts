@@ -23,9 +23,13 @@ import { PolicyService } from "./policy.service";
 export class PolicyListComponent implements OnInit {
   errorMessage = '';
   sub!: Subscription;
-  isLoggedIn:Boolean = false;
-  noDataFound:Boolean = false;
-  displayedColumns:String[] = ['policyID', 'policyName', 'userName', 'country', 'policyCoverage', 'policyPremium', 'paymentStatus', 'actions'];
+  del!: Subscription;
+  isLoggedIn: Boolean = false;
+  noDataFound: Boolean = false;
+  editable: boolean = false;
+  policyGroup!: FormGroup;
+  dataArray:any[] = [];
+  displayedColumns: String[] = ['policyID', 'policyName', 'userName', 'country', 'policyCoverage', 'policyPremium', 'paymentStatus', 'actions'];
   dataSource!: MatTableDataSource<Element>;
   @ViewChild(MatPaginator) paginator!: MatPaginator
   @ViewChild(MatSort) sort!: MatSort
@@ -39,28 +43,18 @@ export class PolicyListComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLocaleLowerCase();
     console.log("filtered value:" + this.dataSource.filter)
   }
-
   ngOnInit(): void {
-    this.dataArray = new FormArray([new FormControl('SF')]);
+  
   this.policyGroup = new FormGroup({
-    dataRow:this.dataArray
+    policyPremium : new FormControl(''),
+    paymentStatus : new FormControl('')
   });
-<<<<<<< Updated upstream
-      this.getPolicy();
+  this.getPolicy();  
+    
   }
-
-  deletePolicy(element:any){
-=======
-  //   this.policyGroup = new FormGroup({
-  //     PaymentStatus: new FormControl(),
-  //     PolicyPremium: new FormControl(),
-  // });
-  this.dataArray = new FormArray([new FormControl('SF')]);
-  this.policyGroup = new FormGroup({
-    dataRow:this.dataArray
-  });
-      
+  getPolicy(){
     let headers = new HttpHeaders();
+    this.dataArray = [];
     let usertoken = localStorage.getItem("userToken");
     if (usertoken !== null) {
       this.isLoggedIn = true;
@@ -68,63 +62,43 @@ export class PolicyListComponent implements OnInit {
       this.sub = this.productService.getPolicy(headers).subscribe((dataResponse) => {
         // alert(JSON.stringify(dataResponse));
         this.posts = dataResponse;
+        for(const data in this.posts){
+          this.dataArray.push({
+            editable: false,
+            rowData:this.posts[data]
+
+          });
+        }
         // alert((JSON.stringify(this.posts)))
-        this.dataSource = new MatTableDataSource(this.posts);
+        this.dataSource = new MatTableDataSource(this.dataArray);
         // this.dataSource
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-        if (dataResponse == null || []) {
+        if(dataResponse == null || (Array.isArray(dataResponse) && dataResponse.length == 0)){
           this.noDataFound = true;
         }
       });
     }
   }
   edit(e: any) {
-    this.editable = !this.editable;
+    
+      e.editable = !e.editable;
+    // }
+    
 
   }
-  deletePolicy(element: any) {
->>>>>>> Stashed changes
+  updatePolicy(element:any){
     let headers = new HttpHeaders();
     let usertoken = localStorage.getItem("userToken");
     if (usertoken !== null) {
       this.isLoggedIn = true;
       headers = headers.set('token', usertoken);
-<<<<<<< Updated upstream
-      this.productService.deletePolicy(element,headers).subscribe( (res)=> {
-      console.log(res);
+      this.productService.updatePolicy(element.rowData,headers,element.editable).subscribe( (res)=> {
+      
+      element.editable = false;
       this.getPolicy();
       
    });
   }
 }
-
-getPolicy():void{
-  let headers = new HttpHeaders();
-  let usertoken = localStorage.getItem("userToken");
-  if (usertoken !== null) {
-    this.isLoggedIn = true;
-    headers = headers.set('token', usertoken);
-    this.sub = this.productService.getPolicy(headers).subscribe((dataResponse) => {
-      console.log(JSON.stringify(dataResponse));
-      this.posts = dataResponse;
-      this.dataSource = new MatTableDataSource(this.posts);
-       this.dataSource.paginator = this.paginator;
-       this.dataSource.sort = this.sort;       
-       if(dataResponse == null || (Array.isArray(dataResponse) && dataResponse.length == 0)){
-          this.noDataFound= true;
-            }
-    });
-  }  
 }
-}
-=======
-      this.del = this.productService.deletePolicy(element, headers).subscribe((res) => {
-        console.log(res);
-        this.ngOnInit();
-
-      });
-    }
-  }
-}
->>>>>>> Stashed changes

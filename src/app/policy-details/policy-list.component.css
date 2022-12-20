@@ -29,6 +29,7 @@ table {
  }
  .edit{
    background-color: green;
+   size:10px
  }
  .delete{
    background-color: red;
@@ -46,4 +47,11 @@ table {
    font-size: larger;
    color: red;
    text-align: center;
+  }
+  .edit-text-box{
+    size:10px;
+    width: 50%;
+  }
+  .cell-td{
+    size:10px
   }
