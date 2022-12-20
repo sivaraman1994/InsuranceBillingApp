@@ -1,6 +1,7 @@
-import { DataSource} from "@angular/cdk/collections";
+import { DataSource } from "@angular/cdk/collections";
 import { HttpHeaders } from "@angular/common/http";
 import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import { FormBuilder, FormGroup,FormControl,FormArray } from "@angular/forms";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from '@angular/material/table';
@@ -28,27 +29,68 @@ export class PolicyListComponent implements OnInit {
   dataSource!: MatTableDataSource<Element>;
   @ViewChild(MatPaginator) paginator!: MatPaginator
   @ViewChild(MatSort) sort!: MatSort
-  posts:any;
+  posts: any;
 
-   constructor(private productService: PolicyService, public router: Router, public navCom: NavBarComponent) { }
+  constructor(private productService: PolicyService, public router: Router, public navCom: NavBarComponent, private _formBuilder: FormBuilder) { }
 
- 
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLocaleLowerCase();
-    console.log("filtered value:"+this.dataSource.filter)
+    console.log("filtered value:" + this.dataSource.filter)
   }
 
   ngOnInit(): void {
+    this.dataArray = new FormArray([new FormControl('SF')]);
+  this.policyGroup = new FormGroup({
+    dataRow:this.dataArray
+  });
+<<<<<<< Updated upstream
       this.getPolicy();
   }
 
   deletePolicy(element:any){
+=======
+  //   this.policyGroup = new FormGroup({
+  //     PaymentStatus: new FormControl(),
+  //     PolicyPremium: new FormControl(),
+  // });
+  this.dataArray = new FormArray([new FormControl('SF')]);
+  this.policyGroup = new FormGroup({
+    dataRow:this.dataArray
+  });
+      
     let headers = new HttpHeaders();
     let usertoken = localStorage.getItem("userToken");
     if (usertoken !== null) {
       this.isLoggedIn = true;
       headers = headers.set('token', usertoken);
+      this.sub = this.productService.getPolicy(headers).subscribe((dataResponse) => {
+        // alert(JSON.stringify(dataResponse));
+        this.posts = dataResponse;
+        // alert((JSON.stringify(this.posts)))
+        this.dataSource = new MatTableDataSource(this.posts);
+        // this.dataSource
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        if (dataResponse == null || []) {
+          this.noDataFound = true;
+        }
+      });
+    }
+  }
+  edit(e: any) {
+    this.editable = !this.editable;
+
+  }
+  deletePolicy(element: any) {
+>>>>>>> Stashed changes
+    let headers = new HttpHeaders();
+    let usertoken = localStorage.getItem("userToken");
+    if (usertoken !== null) {
+      this.isLoggedIn = true;
+      headers = headers.set('token', usertoken);
+<<<<<<< Updated upstream
       this.productService.deletePolicy(element,headers).subscribe( (res)=> {
       console.log(res);
       this.getPolicy();
@@ -76,3 +118,13 @@ getPolicy():void{
   }  
 }
 }
+=======
+      this.del = this.productService.deletePolicy(element, headers).subscribe((res) => {
+        console.log(res);
+        this.ngOnInit();
+
+      });
+    }
+  }
+}
+>>>>>>> Stashed changes
