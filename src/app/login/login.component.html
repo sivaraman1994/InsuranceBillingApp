@@ -41,8 +41,8 @@
 </mat-card> -->
 <div class="welcome">
   <h4>Login</h4>
-  <div class="quizzes">
-    <mat-card class="quiz">
+  
+    
       <mat-card-content>
         <form [formGroup]="contactForm" (submit)="onSubmit(name,password)">
           <div *ngIf="isUnkownError == true">
@@ -78,6 +78,6 @@
           <button mat-raised-button type="button" class="cancelbtn" (click)="cancel()">Cancel</button>
         </form>
       </mat-card-content>
-    </mat-card>
-  </div>
+    
+ 
 </div>

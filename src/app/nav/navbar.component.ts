@@ -89,7 +89,6 @@ export class NavBarComponent {
     modalRef.result.then((result) => {
       console.log(result);
       //this.modalService.dismissAll();
-
     }).catch((error) => {
       console.log(error);
     });

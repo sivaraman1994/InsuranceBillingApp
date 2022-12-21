@@ -30,7 +30,7 @@ export class PolicyService{
 
    }
 
-  deletePolicy({policyID, policyCoverage, policyPremium, paymentStatus}:any,headers: HttpHeaders){
+   updatePolicy({policyID, policyCoverage, policyPremium, paymentStatus}:any,headers: HttpHeaders,isActive: boolean){
      const url = `${'http://localhost:3000/updatePolicy'}`;
      let policyupdate = {
         policyData: {
@@ -38,7 +38,7 @@ export class PolicyService{
             policyCoverage,
             policyPremium,
             paymentStatus,
-            isActive: false
+            isActive: isActive
     }
 }
      return this.http.post<any>(url,  policyupdate, { headers: headers })

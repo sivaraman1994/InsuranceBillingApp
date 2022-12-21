@@ -1,6 +1,7 @@
 import { DataSource} from "@angular/cdk/collections";
 import { HttpHeaders } from "@angular/common/http";
 import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from '@angular/material/table';
@@ -24,13 +25,16 @@ export class PolicyListComponent implements OnInit {
   sub!: Subscription;
   isLoggedIn:Boolean = false;
   noDataFound:Boolean = false;
+  editable: boolean = false;
+  policyGroup!: FormGroup;
+  dataArray:any[] = [];
   displayedColumns:String[] = ['policyID', 'policyName', 'userName', 'country', 'policyCoverage', 'policyPremium', 'paymentStatus', 'actions'];
   dataSource!: MatTableDataSource<Element>;
   @ViewChild(MatPaginator) paginator!: MatPaginator
   @ViewChild(MatSort) sort!: MatSort
   posts:any;
 
-   constructor(private productService: PolicyService, public router: Router, public navCom: NavBarComponent) { }
+   constructor(private productService: PolicyService, public router: Router, public navCom: NavBarComponent, private _formBuilder: FormBuilder) { }
 
  
   applyFilter(event: Event) {
@@ -40,39 +44,59 @@ export class PolicyListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      this.getPolicy();
-  }
+    this.policyGroup = new FormGroup({
+      policyPremium : new FormControl(''),
+      paymentStatus : new FormControl('')
+    });
+    this.getPolicy();  
+      
+    }
 
-  deletePolicy(element:any){
+    updatePolicy(element:any){
     let headers = new HttpHeaders();
+    console.log(this.policyGroup);
+    this.dataArray = [];
     let usertoken = localStorage.getItem("userToken");
     if (usertoken !== null) {
       this.isLoggedIn = true;
       headers = headers.set('token', usertoken);
-      this.productService.deletePolicy(element,headers).subscribe( (res)=> {
-      console.log(res);
-      this.getPolicy();
+      this.productService.updatePolicy(element,headers,element.editable).subscribe( (res)=> {
+        element.editable = false;
+        this.getPolicy();
       
    });
   }
 }
 
-getPolicy():void{
+getPolicy(){
   let headers = new HttpHeaders();
+  this.dataArray = [];
   let usertoken = localStorage.getItem("userToken");
   if (usertoken !== null) {
     this.isLoggedIn = true;
     headers = headers.set('token', usertoken);
     this.sub = this.productService.getPolicy(headers).subscribe((dataResponse) => {
-      console.log(JSON.stringify(dataResponse));
+      // alert(JSON.stringify(dataResponse));
       this.posts = dataResponse;
-      this.dataSource = new MatTableDataSource(this.posts);
-       this.dataSource.paginator = this.paginator;
-       this.dataSource.sort = this.sort;       
-       if(dataResponse == null || (Array.isArray(dataResponse) && dataResponse.length == 0)){
-          this.noDataFound= true;
-            }
+      for(const data in this.posts){
+        this.dataArray.push({
+          editable: false,
+          ...this.posts[data]
+
+        });
+      }
+      // alert((JSON.stringify(this.posts)))
+      this.dataSource = new MatTableDataSource(this.dataArray);
+      // this.dataSource
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+      if(dataResponse == null || (Array.isArray(dataResponse) && dataResponse.length == 0)){
+        this.noDataFound = true;
+      }
     });
-  }  
+  }
 }
+  edit(e: any) {
+        e.editable = !e.editable;
+  }
 }

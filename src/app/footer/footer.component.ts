@@ -12,10 +12,10 @@ import { Component } from '@angular/core'
   
   .footer-default{
     background-color: grey;
-    padding: 5px;
+    padding: 3px;
     margin-bottom: 0px;
     overflow: hidden;
-    position: relative;
+    position: absolute;
     width: 99.3%;
     bottom: 0;
    }

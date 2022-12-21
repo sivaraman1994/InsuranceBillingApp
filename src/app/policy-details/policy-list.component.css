@@ -1,49 +1,57 @@
 .main-header{
-    padding-top: 10px;
-    text-align: center;
+  padding-top: 10px;
+  text-align: center;
 }
 .mat-form-field{
-   margin: 0 40px 20px 65px;
-   width: 16%;
-   font-size: 15px;
+ margin: 0 40px 20px 65px;
+ width: 16%;
+ font-size: 15px;
 }
 .col-md-4{
-   width: 100%;
-   padding: 1px;
+ width: 100%;
+ padding: 1px;
 }
 table {
-    width: 90%;
-    margin: auto 25px 30px 65px;
- }
- .mat-elevation-z8{
-   align-items: center;
- }
- th.mat-header-cell{
-    font-weight:bolder;
-    font-size: medium;
-    color: black;
-    padding: 1px;
- }
- .mat-raised-button{
-    margin: 5px;
- }
- .edit{
-   background-color: green;
- }
- .delete{
-   background-color: red;
- }
+  width: 90%;
+  margin: auto 25px 30px 65px;
+}
+.mat-elevation-z8{
+ align-items: center;
+}
+th.mat-header-cell{
+  font-weight:bolder;
+  font-size: medium;
+  color: black;
+  padding: 1px;
+}
+.mat-raised-button{
+  margin: 5px;
+}
+.edit{
+ background-color: green;
+ size:10px
+}
+.delete{
+ background-color: red;
+}
 
- th.actions{
-   text-align: center;
- }
- td.mat-cell{
-   padding-right: 30px;
- }
- .data-notfound-error{
-   margin-bottom: 10px;
-   font-weight:bolder;
-   font-size: larger;
-   color: red;
-   text-align: center;
-  }
+th.actions{
+ text-align: center;
+}
+td.mat-cell{
+ padding-right: 30px;
+}
+.data-notfound-error{
+ margin-bottom: 10px;
+ font-weight:bolder;
+ font-size: larger;
+ color: red;
+ text-align: center;
+}
+.edit-text-box{
+  size:10px;
+  width: 50%;
+}
+.cell-td{
+  size:10px
+}
