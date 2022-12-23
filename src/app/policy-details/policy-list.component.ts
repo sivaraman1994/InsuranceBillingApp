@@ -1,87 +1,118 @@
-<nav-bar></nav-bar>
-<div class="main-header">
-    <h3>Policy List</h3>
-</div>
-<div *ngIf = "isLoggedIn != true" class ="data-notfound-error"> Data Not Found !!! Please Login to view the details</div>
+import { DataSource} from "@angular/cdk/collections";
+import { HttpHeaders } from "@angular/common/http";
+import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
+import { MatPaginator } from "@angular/material/paginator";
+import { MatSort } from "@angular/material/sort";
+import { MatTableDataSource } from '@angular/material/table';
+import { TooltipTouchGestures } from "@angular/material/tooltip";
+import { Router } from "@angular/router";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { Subscription } from "rxjs";
+import { NavBarComponent } from "../nav/navbar.component";
+import { PolicyCreationComponent } from "../policy-creation/policy-creation.component";
+import { Element } from "./policy";
+import { PolicyService } from "./policy.service";
 
-<mat-form-field appearence="fill" *ngIf = "isLoggedIn == true " class='col-md-6'>
-    <mat-label>Search Policy Details...</mat-label>
-        <input matInput class="col-md-4" type='text' (keyup)="applyFilter($event)" #input/>
-</mat-form-field>
 
-<a *ngIf="isLoggedIn == true && isAgent == true" id="item" class="btn btn-primary" routerLinkActive="active"
-        [routerLinkActiveOptions]="{exact:true} " (click)="openPolicyCreationModal()" style="margin-left: 850px;">Create Policy</a>
 
-<div [formGroup]="policyGroup" >
-            <table *ngIf = "isLoggedIn == true" mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>                 
-                <ng-container matColumnDef="policyID">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> PolicyID </th>
-                    <td mat-cell *matCellDef="let element"> {{element.policyID}} </td>
-                </ng-container>
+@Component({
+  selector: 'app-policy-list',
+  templateUrl: './policy-list.component.html',
+  styleUrls: ['./policy-list.component.css']
 
-                <ng-container matColumnDef="policyName">
-                    <th mat-header-cell *matHeaderCellDef> PolicyName </th>
-                    <td mat-cell *matCellDef="let element"> {{element.policyName}} </td>
-                </ng-container>
+})
+export class PolicyListComponent implements OnInit {
+  errorMessage = '';
+  sub!: Subscription;
+  isLoggedIn:Boolean = false;
+  isAgent:Boolean = false;
+  noDataFound:Boolean = false;
+  editable: boolean = false;
+  policyGroup!: FormGroup;
+  dataArray:any[] = [];
+  displayedColumns:String[] = ['policyID', 'policyName', 'userName', 'country', 'policyCoverage', 'policyPremium', 'paymentStatus', 'actions'];
+  dataSource!: MatTableDataSource<Element>;
+  @ViewChild(MatPaginator) paginator!: MatPaginator
+  @ViewChild(MatSort) sort!: MatSort
+  posts:any;
 
-                <ng-container matColumnDef="userName">
-                    <th mat-header-cell *matHeaderCellDef> User/Agent Name </th>
-                    <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
-                </ng-container>
+   constructor(private productService: PolicyService, public router: Router, public navCom: NavBarComponent, private _formBuilder: FormBuilder,
+    public modalService: NgbModal) { }
 
-                <ng-container matColumnDef="country">
-                    <th mat-header-cell *matHeaderCellDef> Country </th>
-                    <td mat-cell *matCellDef="let element"> {{element.country}} </td>
-                </ng-container>
+ 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLocaleLowerCase();
+    console.log("filtered value:"+this.dataSource.filter)
+  }
 
-                <ng-container matColumnDef="policyCoverage">
-                    <th mat-header-cell *matHeaderCellDef> Policy Coverage </th>
-                    <td class = "cell-td" mat-cell *matCellDef="let element"> {{element.policyCoverage}} </td>
-                </ng-container>
-                
-                <ng-container matColumnDef="policyPremium">
-                    <th mat-header-cell *matHeaderCellDef> Policy Premium </th>
-                    <td  mat-cell *matCellDef="let element ; let i = index">
-                        <span  *ngIf="!element.editable; else editPlace1">
-                            {{element.policyPremium}}
-                           </span>
-                           <ng-template #editPlace1>
-                            
-                             <input [(ngModel)]="element.policyPremium"  formControlName ="policyPremium" 
-                             class = "edit-text-box" (keyup.enter)="element.editable = false" >
-                            
-                           </ng-template> </td>
-                  </ng-container>
-                
-                 <ng-container matColumnDef="paymentStatus">
-                    <th mat-header-cell *matHeaderCellDef> Payment Status </th>
-                    <td  mat-cell *matCellDef="let element; let i = index" > 
-                        <span  *ngIf="!element.editable; else editPlace">
-                        {{element.paymentStatus}} 
-                       </span>
-                       <ng-template #editPlace>
-                       
-                         <input [(ngModel)]="element.paymentStatus" class = "edit-text-box"
-                          formControlName ="paymentStatus" 
-                          (keyup.enter)="element.editable = false" >
-                        
-                       </ng-template>
-                    </td>
-                 </ng-container>
+  ngOnInit(): void {
+    this.policyGroup = new FormGroup({
+      policyPremium : new FormControl(''),
+      paymentStatus : new FormControl('')
+    });
+    this.getPolicy();  
+      
+    }
+    
+    openPolicyCreationModal(){
+      const modalRef = this.modalService.open(PolicyCreationComponent);
+      modalRef.result.then((result) => {
+      console.log(result);
+     }).catch((error) => {
+        console.log(error);
+      });
+    }
 
-                 <ng-container matColumnDef="actions">
-                    <th class="actions" mat-header-cell *matHeaderCellDef> Actions </th>
-                    <td class="update" mat-cell *matCellDef="let element; let i = index" >
-                        <button *ngIf = "element.editable == false && isAgent == true" mat-raised-button class="edit" (click)="edit(element)" > Edit</button>
-                        <button *ngIf = "element.editable == true && isAgent == true" mat-raised-button class="edit" (click)="updatePolicy(element)" > Save</button>
-                        <button *ngIf = "isAgent == true" mat-raised-button (click)="updatePolicy(element)" class="delete">Delete</button>
-                    </td>
-                 </ng-container>
+    updatePolicy(element:any){
+    let headers = new HttpHeaders();
+    console.log(this.policyGroup);
+    this.dataArray = [];
+    let usertoken = localStorage.getItem("userToken");
+    if (usertoken !== null) {
+      this.isLoggedIn = true;
+      //this.isAgent = true;
+      headers = headers.set('token', usertoken);
+      this.productService.updatePolicy(element,headers,element.editable).subscribe( (res)=> {
+        element.editable = false;
+        this.getPolicy();
+      
+   });
+  }
+}
 
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
-        </div>
-            <mat-paginator [pageSizeOptions]="[4,10,25,100]"></mat-paginator>
-            <div *ngIf = "isLoggedIn == true && noDataFound == true && isAgent == true" class ="data-notfound-error"> Data Not Found !!! Please work with user to create policy</div>
-         
+getPolicy(){
+  let headers = new HttpHeaders();
+  this.dataArray = [];
+  let usertoken = localStorage.getItem("userToken");
+  let userType = localStorage.getItem("userType");
+  if (usertoken !== null) {
+    this.isLoggedIn = true;
+    this.isAgent = userType == "AGENT";
+    headers = headers.set('token', usertoken);
+    this.sub = this.productService.getPolicy(headers).subscribe((dataResponse) => {
+      // alert(JSON.stringify(dataResponse));
+      this.posts = dataResponse;
+      for(const data in this.posts){
+        this.dataArray.push({
+          editable: false,
+          ...this.posts[data]
+
+        });
+      }
+      // alert((JSON.stringify(this.posts)))
+      this.dataSource = new MatTableDataSource(this.dataArray);
+      // this.dataSource
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+      if(dataResponse == null || (Array.isArray(dataResponse) && dataResponse.length == 0)){
+        this.noDataFound = true;
+      }
+    });
+  }
+}
+  edit(e: any) {
+        e.editable = !e.editable;
+  }
+}
