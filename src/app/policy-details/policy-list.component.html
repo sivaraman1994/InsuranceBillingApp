@@ -1,12 +1,17 @@
 <nav-bar></nav-bar>
 <div class="main-header">
-    <h3>Policy List</h3><br>
+    <h3>Policy List</h3>
 </div>
 <div *ngIf = "isLoggedIn != true" class ="data-notfound-error"> Data Not Found !!! Please Login to view the details</div>
+
 <mat-form-field appearence="fill" *ngIf = "isLoggedIn == true " class='col-md-6'>
     <mat-label>Search Policy Details...</mat-label>
         <input matInput class="col-md-4" type='text' (keyup)="applyFilter($event)" #input/>
 </mat-form-field>
+
+<a *ngIf="isLoggedIn == true && isAgent == true" id="item" class="btn btn-primary" routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact:true} " (click)="openPolicyCreationModal()" style="margin-left: 850px;">Create Policy</a>
+
 <div [formGroup]="policyGroup" >
             <table *ngIf = "isLoggedIn == true" mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>                 
                 <ng-container matColumnDef="policyID">
