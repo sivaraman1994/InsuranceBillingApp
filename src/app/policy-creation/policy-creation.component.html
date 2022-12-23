@@ -1,0 +1,121 @@
+<form [formGroup]="createpolicyForm" (ngSubmit)="onSubmit(policyID,policyName,userEmail,policyCoverage,policyPremium,travelStartDate,travelEndDate,dueDate,country,paymentStatus)" action="action_page.php" style="border:1px solid #ccc" novalidate>
+  
+    <div class="container">
+      <h4>Create Policy</h4>
+      <div class="exists" *ngIf="UserNotExists">
+        User ID does not exists. Please create an account for the same user.<br>
+      </div>
+      <div class="success" *ngIf="isPolicySucess">
+        Policy is successfully created.Please refresh Policy Details Page.<br>
+    </div>
+      <mat-form-field class="full-width">
+        <mat-label for="fname">Policy ID</mat-label>
+        <input matInput type="text" placeholder="Policy ID" [(ngModel)]="policyID" formControlName="policyID"/>
+      </mat-form-field>
+        <mat-error *ngIf="(createpolicyForm.get('policyID')?.touched||createpolicyForm.get('policyID')?.dirty) && createpolicyForm.get('policyID')?.hasError('required')">
+          Policy ID is Required!
+        </mat-error>
+        <mat-error *ngIf="(createpolicyForm.get('policyID')?.touched||createpolicyForm.get('policyID')?.dirty) && createpolicyForm.get('policyID')?.hasError('minlength')">
+          Policy ID should be atleast 3 characters long!
+        </mat-error>
+        
+        <mat-form-field class="full-width">
+        <mat-label for="policyName">Policy Name</mat-label>
+        <input matInput type="text" placeholder="Policy Name" [(ngModel)]="policyName" formControlName="policyName"/>
+        </mat-form-field>
+        <mat-error *ngIf="(createpolicyForm.get('policyName')?.touched||createpolicyForm.get('policyName')?.dirty) && createpolicyForm.get('policyName')?.hasError('required')">
+          Policy Name is Required!
+        </mat-error>
+        <mat-error *ngIf="(createpolicyForm.get('policyName')?.touched||createpolicyForm.get('policyName')?.dirty) && createpolicyForm.get('policyName')?.hasError('minlength')">
+          Policy Name should be atleast 6 characters long!
+        </mat-error>
+
+        <mat-form-field class="full-width">
+          <mat-label for="country">Country</mat-label>
+          <input matInput type="text" placeholder="country" [(ngModel)]="country" formControlName="country"/>
+          </mat-form-field>
+          <mat-error *ngIf="(createpolicyForm.get('country')?.touched||createpolicyForm.get('country')?.dirty) && createpolicyForm.get('country')?.hasError('required')">
+            Country Name is Required!
+          </mat-error>
+          <mat-error *ngIf="(createpolicyForm.get('country')?.touched||createpolicyForm.get('country')?.dirty) && createpolicyForm.get('country')?.hasError('minlength')">
+            Country Name should be atleast 3 characters long!
+          </mat-error>
+        
+        <mat-form-field class="full-width">
+          <mat-label  for="userEmail">User Email Address</mat-label>
+          <input matInput type="text" placeholder="Enter Email" [(ngModel)]="userEmail" formControlName="userEmail"/>
+          </mat-form-field>
+          <mat-error *ngIf="(createpolicyForm.get('userEmail')?.touched||createpolicyForm.get('userEmail')?.dirty) && createpolicyForm.get('userEmail')?.hasError('required')">
+            User Email is Required!
+          </mat-error>
+          <mat-error *ngIf="(createpolicyForm.get('userEmail')?.touched||createpolicyForm.get('userEmail')?.dirty) && createpolicyForm.get('userEmail')?.hasError('email')">
+            Please enter a valid email address!
+          </mat-error>
+          
+          <mat-form-field>
+            <mat-label>Travel Start Date</mat-label>
+            <input matInput type="date" [(ngModel)]="travelStartDate" formControlName="travelStartDate">
+            <mat-error *ngIf="(createpolicyForm.get('travelStartDate')?.touched||createpolicyForm.get('travelStartDate')?.dirty) && createpolicyForm.get('travelStartDate')?.hasError('required')">
+               Travel Start Date is required!
+            </mat-error> 
+            <mat-error *ngIf="(createpolicyForm.get('travelEndDate')?.touched||createpolicyForm.get('travelEndDate')?.dirty) && createpolicyForm.get('travelEndDate')?.hasError('maxLength')">
+              Enter valid date!
+           </mat-error>  
+          </mat-form-field> 
+
+          <mat-form-field>
+            <mat-label>Travel End Date</mat-label>
+            <input matInput type="date" [(ngModel)]="travelEndDate" formControlName="travelEndDate">
+            <mat-error *ngIf="(createpolicyForm.get('travelEndDate')?.touched||createpolicyForm.get('travelEndDate')?.dirty) && createpolicyForm.get('travelEndDate')?.hasError('required')">
+               Travel End Date is required!
+            </mat-error>  
+            <mat-error *ngIf="(createpolicyForm.get('travelEndDate')?.touched||createpolicyForm.get('travelEndDate')?.dirty) && createpolicyForm.get('travelEndDate')?.hasError('maxLength')">
+              Enter valid date!
+           </mat-error> 
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Due Date</mat-label>
+            <input matInput type="date" [(ngModel)]="dueDate" formControlName="dueDate">
+            <mat-error *ngIf="(createpolicyForm.get('dueDate')?.touched||createpolicyForm.get('dueDate')?.dirty) && createpolicyForm.get('dueDate')?.hasError('required')">
+               Due Date is required!
+            </mat-error> 
+            <mat-error *ngIf="(createpolicyForm.get('travelEndDate')?.touched||createpolicyForm.get('travelEndDate')?.dirty) && createpolicyForm.get('travelEndDate')?.hasError('maxLength')">
+              Enter valid date!
+           </mat-error>  
+          </mat-form-field>
+
+          <mat-form-field class="full-width">
+            <mat-label for="policyCoverage">Policy Coverage</mat-label>
+            <input matInput type="number" placeholder="Policy Coverage" [(ngModel)]="policyCoverage" formControlName="policyCoverage"/>
+            </mat-form-field>
+            <mat-error *ngIf="(createpolicyForm.get('policyCoverage')?.touched||createpolicyForm.get('policyCoverage')?.dirty) && createpolicyForm.get('policyCoverage')?.hasError('required')">
+              Policy Coverage is Required!
+            </mat-error>
+
+            <mat-form-field class="full-width">
+              <mat-label for="policyPremium">Policy Premium</mat-label>
+              <input matInput type="number" placeholder="Policy Premium" [(ngModel)]="policyPremium" formControlName="policyPremium"/>
+              </mat-form-field>
+              <mat-error *ngIf="(createpolicyForm.get('policyPremium')?.touched||createpolicyForm.get('policyPremium')?.dirty) && createpolicyForm.get('policyPremium')?.hasError('required')">
+                Policy Premium is Required!
+              </mat-error>
+
+              <mat-form-field class="full-width">
+                <mat-label for="paymentStatus">Payment Status</mat-label>
+                <input matInput type="text" placeholder="Payment Status" [(ngModel)]="paymentStatus" formControlName="paymentStatus"/>
+                </mat-form-field>
+                <mat-error *ngIf="(createpolicyForm.get('paymentStatus')?.touched||createpolicyForm.get('paymentStatus')?.dirty) && createpolicyForm.get('paymentStatus')?.hasError('required')">
+                  Payment Name is Required!
+                </mat-error>
+                <mat-error *ngIf="(createpolicyForm.get('paymentStatus')?.touched||createpolicyForm.get('paymentStatus')?.dirty) && createpolicyForm.get('paymentStatus')?.hasError('minlength')">
+                  Payment Status should be atleast 6 characters long!!
+                </mat-error>
+
+      <div class="clearfix">
+        <button mat-raised-button type="button" class="cancelbtn" (click)="cancel()">Cancel</button>
+        <button mat-raised-button type="submit" class="signupbtn" [disabled]="createpolicyForm.invalid">Create Policy</button>
+      </div>
+    </div>
+  </form>
+  

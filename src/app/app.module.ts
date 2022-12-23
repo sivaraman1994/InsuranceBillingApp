@@ -20,6 +20,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule,MatFormFieldControl, MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field'
 import { appRoutes } from './routes';
 import { PolicyDetailsComponent } from './policy-details/policy-details.component';
@@ -33,6 +34,8 @@ import { convertToSpacesPipe } from './policy-details/convert-to-space.pipe';
 import { RegisterService } from './services/register.service';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { PolicyCreationComponent } from './policy-creation/policy-creation.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 
 @NgModule({
@@ -49,6 +52,8 @@ import { MatSortModule } from '@angular/material/sort';
     MatButtonModule,
     MatRadioModule,
     MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     MatButtonModule,
     NgbModule,
     MatPaginatorModule,
@@ -68,7 +73,9 @@ import { MatSortModule } from '@angular/material/sort';
     MatToolbarModule, 
     MatFormFieldModule,
     MatInputModule, 
-    MatCardModule
+    MatCardModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   declarations: [
     AppComponent,
@@ -81,6 +88,7 @@ import { MatSortModule } from '@angular/material/sort';
     convertToSpacesPipe,
     ViewInvoiceComponent,
     LoginComponent,
+    PolicyCreationComponent,
     FilterPipe
   ],
   providers:  [BackendApiService, NavBarComponent,[{provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'legacy'}}],

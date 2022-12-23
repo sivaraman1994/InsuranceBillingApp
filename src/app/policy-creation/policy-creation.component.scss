@@ -1,0 +1,61 @@
+
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+    width: 100%;
+    margin-left: 5px;
+    border: none;
+  }
+  input[type=date]{
+    width:fit-content
+
+  }
+    /* Set a style for all buttons */
+  button {
+    background-color: #04AA6D;
+    color: white;
+    padding: 5px 5px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+  }
+  
+  button:hover {
+    opacity:1;
+  }
+  .full-width{
+    width: 90%;
+  }
+  
+  /* Extra styles for the cancel button */
+  .cancelbtn {
+    padding: 5px 5px;
+    background-color: #f44336;
+  }
+  
+  /* Float cancel and signup buttons and add an equal width */
+  .cancelbtn, .signupbtn {
+    margin: 20px 25px 20px 50px;
+    float: left;
+    width: 30%;
+  }
+  
+  /* Add padding to container elements */
+  .container {
+    padding: 16px;
+  }
+  
+  /* Clear floats */
+  .clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  .exists{
+    color: red;
+  }
+  .success{
+    color: green;
+  }
+

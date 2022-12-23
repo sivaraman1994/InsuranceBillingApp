@@ -48,7 +48,11 @@ export class LoginComponent implements OnInit {
       
        if(res.token){
        localStorage.setItem("userName",res.userName);
-        localStorage.setItem("userToken",res.token);
+       localStorage.setItem("userType",res.userType);
+       localStorage.setItem("userToken",res.token);
+         if(res.userType=="AGENT" && Boolean(res.agentID)){
+            localStorage.setItem("agentID",res.agentID)
+         }
         this.navCom.modalService.dismissAll(); 
         
         this.refreshNavBar.emit("refresh");

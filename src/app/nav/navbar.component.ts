@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { RegisterComponent } from '../register/register.component';
+import { PolicyCreationComponent } from '../policy-creation/policy-creation.component';
 
 
 @Component({
@@ -107,7 +108,7 @@ export class NavBarComponent {
       console.log(error);
     });
   }
-
+  
   ngOnInit(): void {
     // alert(localStorage.getItem('userName'));
     let name = localStorage.getItem('userName');

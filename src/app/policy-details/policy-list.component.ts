@@ -7,8 +7,10 @@ import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from '@angular/material/table';
 import { TooltipTouchGestures } from "@angular/material/tooltip";
 import { Router } from "@angular/router";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { Subscription } from "rxjs";
 import { NavBarComponent } from "../nav/navbar.component";
+import { PolicyCreationComponent } from "../policy-creation/policy-creation.component";
 import { Element } from "./policy";
 import { PolicyService } from "./policy.service";
 
@@ -24,6 +26,7 @@ export class PolicyListComponent implements OnInit {
   errorMessage = '';
   sub!: Subscription;
   isLoggedIn:Boolean = false;
+  isAgent:Boolean = false;
   noDataFound:Boolean = false;
   editable: boolean = false;
   policyGroup!: FormGroup;
@@ -34,7 +37,8 @@ export class PolicyListComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort
   posts:any;
 
-   constructor(private productService: PolicyService, public router: Router, public navCom: NavBarComponent, private _formBuilder: FormBuilder) { }
+   constructor(private productService: PolicyService, public router: Router, public navCom: NavBarComponent, private _formBuilder: FormBuilder,
+    public modalService: NgbModal) { }
 
  
   applyFilter(event: Event) {
@@ -51,6 +55,15 @@ export class PolicyListComponent implements OnInit {
     this.getPolicy();  
       
     }
+    
+    openPolicyCreationModal(){
+      const modalRef = this.modalService.open(PolicyCreationComponent);
+      modalRef.result.then((result) => {
+      console.log(result);
+     }).catch((error) => {
+        console.log(error);
+      });
+    }
 
     updatePolicy(element:any){
     let headers = new HttpHeaders();
@@ -59,6 +72,7 @@ export class PolicyListComponent implements OnInit {
     let usertoken = localStorage.getItem("userToken");
     if (usertoken !== null) {
       this.isLoggedIn = true;
+      //this.isAgent = true;
       headers = headers.set('token', usertoken);
       this.productService.updatePolicy(element,headers,element.editable).subscribe( (res)=> {
         element.editable = false;
@@ -72,8 +86,10 @@ getPolicy(){
   let headers = new HttpHeaders();
   this.dataArray = [];
   let usertoken = localStorage.getItem("userToken");
+  let userType = localStorage.getItem("userType");
   if (usertoken !== null) {
     this.isLoggedIn = true;
+    this.isAgent = userType == "AGENT";
     headers = headers.set('token', usertoken);
     this.sub = this.productService.getPolicy(headers).subscribe((dataResponse) => {
       // alert(JSON.stringify(dataResponse));

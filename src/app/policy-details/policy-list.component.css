@@ -34,7 +34,17 @@ th.mat-header-cell{
 .delete{
  background-color: red;
 }
-
+#item-hover{
+  margin-right: 80px;
+  margin-left: 80px;
+  text-decoration: none;
+  font-size:larger;
+  color: white;
+   
+}
+a{
+  color:black
+}
 th.actions{
  text-align: center;
 }
