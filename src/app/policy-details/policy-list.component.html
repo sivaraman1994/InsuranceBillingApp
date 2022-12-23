@@ -1,12 +1,18 @@
 <nav-bar></nav-bar>
 <div class="main-header">
-    <h3>Policy List</h3><br>
+    <h3>Policy List</h3>
 </div>
 <div *ngIf = "isLoggedIn != true" class ="data-notfound-error"> Data Not Found !!! Please Login to view the details</div>
+
 <mat-form-field appearence="fill" *ngIf = "isLoggedIn == true " class='col-md-6'>
     <mat-label>Search Policy Details...</mat-label>
         <input matInput class="col-md-4" type='text' (keyup)="applyFilter($event)" #input/>
 </mat-form-field>
+
+<a *ngIf="isLoggedIn == true && isAgent == true" id="item" class="btn btn-primary" routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact:true} " (click)="openPolicyCreationModal()" style="margin-left: 850px;">Create Policy</a>
+
+<div [formGroup]="policyGroup" >
             <table *ngIf = "isLoggedIn == true" mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>                 
                 <ng-container matColumnDef="policyID">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> PolicyID </th>
@@ -19,7 +25,7 @@
                 </ng-container>
 
                 <ng-container matColumnDef="userName">
-                    <th mat-header-cell *matHeaderCellDef> UserName </th>
+                    <th mat-header-cell *matHeaderCellDef> User/Agent Name </th>
                     <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
                 </ng-container>
 
@@ -29,33 +35,53 @@
                 </ng-container>
 
                 <ng-container matColumnDef="policyCoverage">
-                    <th mat-header-cell *matHeaderCellDef> PolicyCoverage </th>
-                    <td mat-cell *matCellDef="let element"> {{element.policyCoverage}} </td>
+                    <th mat-header-cell *matHeaderCellDef> Policy Coverage </th>
+                    <td class = "cell-td" mat-cell *matCellDef="let element"> {{element.policyCoverage}} </td>
                 </ng-container>
                 
                 <ng-container matColumnDef="policyPremium">
-                    <th mat-header-cell *matHeaderCellDef> PolicyPremium </th>
-                    <td mat-cell *matCellDef="let element"> {{element.policyPremium}} </td>
+                    <th mat-header-cell *matHeaderCellDef> Policy Premium </th>
+                    <td  mat-cell *matCellDef="let element ; let i = index">
+                        <span  *ngIf="!element.editable; else editPlace1">
+                            {{element.policyPremium}}
+                           </span>
+                           <ng-template #editPlace1>
+                            
+                             <input [(ngModel)]="element.policyPremium"  formControlName ="policyPremium" 
+                             class = "edit-text-box" (keyup.enter)="element.editable = false" >
+                            
+                           </ng-template> </td>
                   </ng-container>
                 
                  <ng-container matColumnDef="paymentStatus">
-                    <th mat-header-cell *matHeaderCellDef> PaymentStatus </th>
-                    <td mat-cell *matCellDef="let element"> {{element.paymentStatus}} </td>
+                    <th mat-header-cell *matHeaderCellDef> Payment Status </th>
+                    <td  mat-cell *matCellDef="let element; let i = index" > 
+                        <span  *ngIf="!element.editable; else editPlace">
+                        {{element.paymentStatus}} 
+                       </span>
+                       <ng-template #editPlace>
+                       
+                         <input [(ngModel)]="element.paymentStatus" class = "edit-text-box"
+                          formControlName ="paymentStatus" 
+                          (keyup.enter)="element.editable = false" >
+                        
+                       </ng-template>
+                    </td>
                  </ng-container>
 
                  <ng-container matColumnDef="actions">
                     <th class="actions" mat-header-cell *matHeaderCellDef> Actions </th>
-                    <td mat-cell *matCellDef="let element" >
-                        <button mat-raised-button class="edit">Edit</button>
-
-                        <button mat-raised-button (click)="deletePolicy(element)" class="delete">Delete</button>
+                    <td class="update" mat-cell *matCellDef="let element; let i = index" >
+                        <button *ngIf = "element.editable == false" mat-raised-button class="edit" (click)="edit(element)" > Edit</button>
+                        <button *ngIf = "element.editable == true" mat-raised-button class="edit" (click)="updatePolicy(element)" > Save</button>
+                        <button mat-raised-button (click)="updatePolicy(element)" class="delete">Delete</button>
                     </td>
                  </ng-container>
 
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
+        </div>
             <mat-paginator [pageSizeOptions]="[4,10,25,100]"></mat-paginator>
-            <div *ngIf = "isLoggedIn == true && noDataFound == true" class ="data-notfound-error"> Data Not Found !!! Please work with user to create policy</div>
-      
-            <footer-bar></footer-bar>    
+            <div *ngIf = "isLoggedIn == true && noDataFound == true && isAgent == true" class ="data-notfound-error"> Data Not Found !!! Please work with user to create policy</div>
+         
