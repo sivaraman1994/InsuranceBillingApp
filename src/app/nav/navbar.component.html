@@ -18,6 +18,9 @@
       <u *ngIf="isLoggedIn == true " class="nav-item" id="username" style="margin-left: 250px;">welcome {{userName}}</u>
       <a *ngIf="isLoggedIn == true  " class="nav-item" class="btn btn-primary" routerLinkActive="active"
         [routerLinkActiveOptions]="{exact:true} " (click)="logoff()" style="margin-left: 25px;">Logout</a>
+      
+        
+   
     </div>
   </div>
 </header>
