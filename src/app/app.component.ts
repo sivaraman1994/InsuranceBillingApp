@@ -6,7 +6,7 @@ import {FormGroup, FormControl} from '@angular/forms';
   template: `
  
   <router-outlet></router-outlet>
-  
+  <footer-bar></footer-bar>
   `,
   styleUrls: ['./app.component.css']
 })
