@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { RegisterComponent } from '../register/register.component';
+import { PolicyCreationComponent } from '../policy-creation/policy-creation.component';
 
 
 @Component({
@@ -89,7 +90,6 @@ export class NavBarComponent {
     modalRef.result.then((result) => {
       console.log(result);
       //this.modalService.dismissAll();
-
     }).catch((error) => {
       console.log(error);
     });
@@ -108,7 +108,7 @@ export class NavBarComponent {
       console.log(error);
     });
   }
-
+  
   ngOnInit(): void {
     // alert(localStorage.getItem('userName'));
     let name = localStorage.getItem('userName');
