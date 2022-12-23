@@ -72,9 +72,9 @@
                  <ng-container matColumnDef="actions">
                     <th class="actions" mat-header-cell *matHeaderCellDef> Actions </th>
                     <td class="update" mat-cell *matCellDef="let element; let i = index" >
-                        <button *ngIf = "element.editable == false" mat-raised-button class="edit" (click)="edit(element)" > Edit</button>
-                        <button *ngIf = "element.editable == true" mat-raised-button class="edit" (click)="updatePolicy(element)" > Save</button>
-                        <button mat-raised-button (click)="updatePolicy(element)" class="delete">Delete</button>
+                        <button *ngIf = "element.editable == false && isAgent == true" mat-raised-button class="edit" (click)="edit(element)" > Edit</button>
+                        <button *ngIf = "element.editable == true && isAgent == true" mat-raised-button class="edit" (click)="updatePolicy(element)" > Save</button>
+                        <button *ngIf = "isAgent == true" mat-raised-button (click)="updatePolicy(element)" class="delete">Delete</button>
                     </td>
                  </ng-container>
 
