@@ -24,14 +24,19 @@ export class PolicyService{
 
    getPolicy(headers: HttpHeaders): Observable<any> {
 
-    const Url = `${'http://localhost:4020/fetchPolicyDetails'}`;
-
+    const Url = `${'http://localhost:3000/fetchPolicyDetails'}`;
     return this.http.get<any>(Url, { headers: headers })
 
    }
-
-  updatePolicy({policyID, policyCoverage, policyPremium, paymentStatus}:any,headers: HttpHeaders,isActive: boolean){
-     const url = `${'http://localhost:4020/updatePolicy'}`;
+   addPolicy(data:any, header: HttpHeaders): Observable<any>{
+    //   console.log(header)
+      let url = `${'http://localhost:3000/addPolicy'}`;
+      console.log(data)
+      return this.http.post(url, data, {headers:header})
+ }
+   
+   updatePolicy({policyID, policyCoverage, policyPremium, paymentStatus}:any,headers: HttpHeaders,isActive: boolean){
+     const url = `http://localhost:3000/updatePolicy`;
      let policyupdate = {
         policyData: {
             policyID,
