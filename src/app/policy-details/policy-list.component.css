@@ -33,7 +33,12 @@ table {
  .delete{
    background-color: red;
  }
-
+ td.update{
+  text-align: center;
+ }
+  a{
+    color: black;
+  }
  th.actions{
    text-align: center;
  }
