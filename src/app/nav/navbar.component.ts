@@ -12,7 +12,9 @@ import { PolicyCreationComponent } from '../policy-creation/policy-creation.comp
   templateUrl: './navbar.component.html',
   styles: [`
   header#myHeader {
-    box-shadow: 20px -30px 35px 15px grey;
+    
+    background-color: white;
+    box-shadow: 20px -30px 35px 15px light grey;
     top: 0;
     width: 100%;
     z-index: 99999;
