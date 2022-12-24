@@ -1,14 +1,12 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 /* @import "~font-awesome/css/font-awesome.min.css"; */
-
 body{
-  background-color: rgb(235, 232, 232);
+  background-image : url("../src/assets/background.jpg");
 }
 .nav-item:hover {
     color: orange;
     cursor: pointer;
   }
-  
   .container {
     padding-top: 10px;
   }
