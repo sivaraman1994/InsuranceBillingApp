@@ -1,6 +1,9 @@
 .main-header{
     padding-top: 10px;
     text-align: center;
+   font-weight: bolder;
+   font-size: larger;
+    color: white;
 }
 .mat-form-field{
    margin: 0 40px 20px 65px;
@@ -9,7 +12,18 @@
 }
 .col-md-4{
    width: 100%;
-   padding: 1px;
+   margin-top: 1px;
+   padding: 4px;
+  background-color: white;
+}
+.mat-label{
+  font-weight:bolder;
+    font-size: medium;
+  color: white;
+}
+.col-md-6{
+  color: black;
+  background-color: transparent;
 }
 table {
     width: 90%;
@@ -36,9 +50,13 @@ table {
  td.update{
   text-align: center;
  }
-  a{
-    color: black;
+  #item:hover{
+    background-color: lightblue;
   }
+ #item{
+   color: black;
+    background-color:  white;
+   }
  th.actions{
    text-align: center;
  }
@@ -46,9 +64,22 @@ table {
    padding-right: 30px;
  }
  .data-notfound-error{
-   margin-bottom: 10px;
+   margin-top: 200px;
+   margin-bottom: 220px;
    font-weight:bolder;
-   font-size: larger;
-   color: red;
+   font-size:xx-large;
+   color: whitesmoke;
    text-align: center;
   }
+  .mat-paginator {
+    color: white;
+    background-color: transparent;
+    font-weight:bolder;
+    font-size: small;
+  }
+  ::ng-deep .mat-select-value {
+    color: white;
+    font-weight:bolder;
+    font-size: small;
+  }
+
