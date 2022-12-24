@@ -1,12 +1,12 @@
 <nav-bar></nav-bar>
 <div class="main-header">
-    <h3>Policy List</h3>
+    Policy List
 </div>
-<div *ngIf = "isLoggedIn != true" class ="data-notfound-error"> Data Not Found !!! Please Login to view the details</div>
+<div *ngIf = "isLoggedIn != true" class ="data-notfound-error"> Data Not Found !!! Please Login to view the details.</div>
 
 <mat-form-field appearence="fill" *ngIf = "isLoggedIn == true " class='col-md-6'>
     <mat-label>Search Policy Details...</mat-label>
-        <input matInput class="col-md-4" type='text' (keyup)="applyFilter($event)" #input/>
+        <input matInput class="col-md-4"  type='text' (keyup)="applyFilter($event)" #input/>
 </mat-form-field>
 
 <a *ngIf="isLoggedIn == true && isAgent == true" id="item" class="btn btn-primary" routerLinkActive="active"
@@ -82,6 +82,5 @@
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
         </div>
-            <mat-paginator [pageSizeOptions]="[4,10,25,100]"></mat-paginator>
-            <div *ngIf = "isLoggedIn == true && noDataFound == true && isAgent == true" class ="data-notfound-error"> Data Not Found !!! Please work with user to create policy</div>
-         
+            <mat-paginator *ngIf = "isLoggedIn == true" [pageSizeOptions]="[5,10,25,100]"></mat-paginator>
+            <div *ngIf = "isLoggedIn == true && noDataFound == true && isAgent == true" class ="data-notfound-error"> Data Not Found !!! Please create Policies.</div>    
