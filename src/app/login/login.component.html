@@ -1,44 +1,3 @@
-<!-- <mat-card>
-  <mat-card-title>
-    <h4>Login</h4>
-  </mat-card-title>
-  <mat-card-content>
-    <form [formGroup]="contactForm" (submit)="onSubmit(name,password)">
-
-      <div *ngIf="contactForm.errors?.['unauthenticated']">
-        Username or Password incorrect. Naviagate to sign Up page.
-      </div>
-
-      <mat-form-field>
-        <mat-label>Email</mat-label>
-        <input matInput type="email" name="name" [(ngModel)]="name" formControlName="name">
-      </mat-form-field>
-
-      <mat-error
-        *ngIf="(contactForm.get('name')?.touched||contactForm.get('name')?.dirty) && contactForm.get('name')?.hasError('required')">
-        Name is Required!
-      </mat-error>
-      <mat-error
-        *ngIf="(contactForm.get('name')?.touched||contactForm.get('name')?.dirty) && contactForm.get('name')?.hasError('minlength')">
-        Name should be atleast 3 characters long!!
-      </mat-error>
-
-
-
-      <mat-form-field floatLabel="always" appearance="standard">
-        <mat-label>Password</mat-label>
-        <input matInput name="password" [(ngModel)]="password" formControlName="password">
-      </mat-form-field>
-      <mat-error
-        *ngIf="(contactForm.get('password')?.touched||contactForm.get('password')?.dirty) && contactForm.get('password')?.hasError('required')">
-        Password is Required!
-      </mat-error>
-      <div>
-        <button mat-raised-button color="primary" [disabled]="contactForm.invalid" type="submit">Log In</button>
-      </div>
-    </form>
-  </mat-card-content>
-</mat-card> -->
 <div class="welcome">
   <h4>Login</h4>
   
@@ -48,34 +7,36 @@
           <div *ngIf="isUnkownError == true">
             Unknown Error. Kindly login after some time.
           </div>
-      <div *ngIf="isNotAuthorized == true">
-        Password incorrect. Plese enter valid password.
-      </div>
-      <div *ngIf="isUserIdMissing == true">
-        User ID does not exist.  <a class = "naviagate-signUp" (click)="openSignUpModal()">Click here </a>and Navigate to Sign Up page.
-      </div>
-          <mat-form-field class="full-width">
+          <div *ngIf="isNotAuthorized == true">
+            Password incorrect. Plese enter valid password.
+          </div>
+          <div *ngIf="isUserIdMissing == true">
+            User ID does not exist.  <a class = "naviagate-signUp" (click)="openSignUpModal()">Click here </a>and Navigate to Sign Up page.
+          </div>
+            <mat-form-field class="full-width">
             <mat-label>Email</mat-label>
-            <input matInput placeholder="Email" name="name" [(ngModel)]="name" formControlName="name">
+            <input matInput placeholder="Email" type = "email" name="name" [(ngModel)]="name" formControlName="name">
           </mat-form-field>
-          <mat-error
-            *ngIf="(contactForm.get('name')?.touched||contactForm.get('name')?.dirty) && contactForm.get('name')?.hasError('required')">
-            Email is Required!
-          </mat-error>
-          <mat-error
-            *ngIf="(contactForm.get('name')?.touched||contactForm.get('name')?.dirty) && contactForm.get('name')?.hasError('name')">
-            Enter Valid email ID!
-          </mat-error>
-          <mat-form-field class="full-width">
-            <mat-label>Password</mat-label>
-            <input matInput name="password" [(ngModel)]="password" type = "password" formControlName="password">
-          </mat-form-field>
-          <mat-error
-            *ngIf="(contactForm.get('password')?.touched||contactForm.get('password')?.dirty) && contactForm.get('password')?.hasError('required')">
-            Password is Required!
-          </mat-error>
-          <button mat-raised-button color="primary" class="primary" [disabled]="contactForm.invalid" type="submit">Login</button>
-          <button mat-raised-button type="button" class="cancelbtn" (click)="cancel()">Cancel</button>
+            <mat-error
+              *ngIf="(contactForm.get('name')?.touched||contactForm.get('name')?.dirty) && contactForm.get('name')?.hasError('required')">
+              Email is Required!
+            </mat-error>
+            <mat-error
+              *ngIf="(contactForm.get('name')?.touched||contactForm.get('name')?.dirty) && contactForm.get('name')?.hasError('name')">
+              Enter Valid email ID!
+            </mat-error>
+            <mat-form-field class="full-width">
+              <mat-label>Password</mat-label>
+              <input matInput name="password" [(ngModel)]="password" type = "password" formControlName="password">
+            </mat-form-field>
+            <mat-error
+              *ngIf="(contactForm.get('password')?.touched||contactForm.get('password')?.dirty) && contactForm.get('password')?.hasError('required')">
+              Password is Required!
+            </mat-error>
+            <button mat-raised-button type="button" class="cancelbtn" (click)="cancel()">Cancel</button>
+            <button mat-raised-button type="submit" class="loginBtn" [disabled]="contactForm.invalid" type="submit">Login</button>
+           
+         
         </form>
       </mat-card-content>
     

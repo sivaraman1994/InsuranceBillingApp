@@ -11,13 +11,13 @@
       <!-- <a class="nav-item" [routerLink]="['/viewinvoice']" routerLinkActive="active"
         [routerLinkActiveOptions]="{exact:true}">View Invoice/Pay</a> -->
       <a *ngIf="isLoggedIn != true" class="nav-item" class="btn btn-primary" routerLinkActive="active"
-        [routerLinkActiveOptions]="{exact:true} " (click)="openLoginModal()" style="margin-left: 250px;">Sign In</a>
+        [routerLinkActiveOptions]="{exact:true} " (click)="openLoginModal()" style="margin-left: 230px;">Sign In</a>
       <u *ngIf="isLoggedIn != true " class="nav-item" id="nav-link" routerLinkActive="active"
         [routerLinkActiveOptions]="{exact:true} " (click)="openSignUpModal()">New User? Register</u>
 
-      <u *ngIf="isLoggedIn == true " class="nav-item" id="username" style="margin-left: 250px;">welcome {{userName}}</u>
+      <u *ngIf="isLoggedIn == true " class="nav-item" id="username" style="position: fixed;  top: 10; right: 170px; word-wrap: break-word; width: 10em; ">welcome {{userName}}</u>
       <a *ngIf="isLoggedIn == true  " class="nav-item" class="btn btn-primary" routerLinkActive="active"
-        [routerLinkActiveOptions]="{exact:true} " (click)="logoff()" style="margin-left: 25px;">Logout</a>
+        [routerLinkActiveOptions]="{exact:true} " (click)="logoff()" style="position: fixed;  top: 10; right: 80px; ">Logout</a>
       
         
    

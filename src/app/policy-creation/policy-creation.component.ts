@@ -18,7 +18,7 @@ export class PolicyCreationComponent implements OnInit {
     isPolicySucess!: Boolean;
     UserNotExists!: Boolean;
     isActive!: Boolean;
-    policyID!: String;
+    //policyID!: String;
     policyName!: String;
     userEmail!: String;
     policyCoverage!: Number;
@@ -37,7 +37,7 @@ export class PolicyCreationComponent implements OnInit {
         ngOnInit() {
 
             this.createpolicyForm = this.formBuilder.group({
-                policyID: ['', Validators.required],
+                //policyID: ['', Validators.required],
                 policyName: ['', [Validators.required, Validators.minLength(6)]],
                 country: ['', [Validators.required, Validators.minLength(3)]],
                 userEmail: ['', [Validators.required, Validators.email]],
@@ -53,11 +53,11 @@ export class PolicyCreationComponent implements OnInit {
         cancel(){
         this.modalService.dismissAll();
         }
-        onSubmit(policyID:String, policyName:String, userEmail:String, policyCoverage:Number, policyPremium:Number, travelStartDate:Date, travelEndDate:Date,dueDate:Date, country:String, paymentStatus:String){
+        onSubmit(policyName:String, userEmail:String, policyCoverage:Number, policyPremium:Number, travelStartDate:Date, travelEndDate:Date,dueDate:Date, country:String, paymentStatus:String){
             let agentID = localStorage.getItem("agentID")   
             let policyAdd = {  
             policyData : {
-                policyID: policyID,
+               // policyID: policyID,
                 agentID: agentID,
                 policyName: policyName ,
                 userEmail: userEmail,
@@ -82,7 +82,7 @@ export class PolicyCreationComponent implements OnInit {
 
                 this.isPolicySucess=true;
                 this.UserNotExists=false;
-                
+                window.location.reload();
 
             },
               (err) => {

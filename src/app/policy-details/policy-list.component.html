@@ -83,4 +83,5 @@
             </table>
         </div>
             <mat-paginator *ngIf = "isLoggedIn == true" [pageSizeOptions]="[5,10,25,100]"></mat-paginator>
-            <div *ngIf = "isLoggedIn == true && noDataFound == true && isAgent == true" class ="data-notfound-error"> Data Not Found !!! Please create Policies.</div>    
+            <div *ngIf = "isLoggedIn == true && noDataFound == true && isAgent == true" class ="data-notfound-error"> Data Not Found !!! Please create Policies.</div>  
+            <div *ngIf = "isLoggedIn == true && noDataFound == true && isAgent == false" class ="data-notfound-error"> Data Not Found !!! Please work with agent to create policies.</div>      
