@@ -31,7 +31,8 @@ export class PolicyListComponent implements OnInit {
   editable: boolean = false;
   policyGroup!: FormGroup;
   dataArray:any[] = [];
-  displayedColumns:String[] = ['policyID', 'policyName', 'userName', 'country', 'policyCoverage', 'policyPremium', 'paymentStatus', 'actions'];
+  displayedColumnsForAgent:String[] = ['policyID', 'policyName', 'userName', 'country', 'policyCoverage', 'policyPremium', 'paymentStatus', 'actions'];
+  displayedColumns:String[] = ['policyID', 'policyName', 'userName','country', 'policyCoverage', 'policyPremium', 'paymentStatus'];
   dataSource!: MatTableDataSource<Element>;
   @ViewChild(MatPaginator) paginator!: MatPaginator
   @ViewChild(MatSort) sort!: MatSort
