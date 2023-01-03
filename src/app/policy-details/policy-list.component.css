@@ -13,8 +13,9 @@
 .col-md-4{
    width: 100%;
    margin-top: 1px;
-   padding: 4px;
-  background-color: white;
+   padding: 4px;  
+   color: #fff;
+  
 }
 .mat-label{
   font-weight:bolder;
@@ -64,7 +65,7 @@ table {
    padding-right: 30px;
  }
  .data-notfound-error{
-   margin-top: 200px;
+   margin-top: 20px;
    margin-bottom: 220px;
    font-weight:bolder;
    font-size:xx-large;
