@@ -7,6 +7,11 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from '../login/login.component';
 import { PolicyService } from '../policy-details/policy.service';
 import { BackendApiService } from '../services/backend-api.service';
+
+interface statusList {
+    value: string;
+    viewValue: string;
+  }
 @Component({
   selector: 'app-policy-creation',
   templateUrl: './policy-creation.component.html',
@@ -29,7 +34,7 @@ export class PolicyCreationComponent implements OnInit {
     dueDate!: Date;
     country!: String;
     createpolicyForm! : FormGroup;
-
+   
     constructor(private apiService:BackendApiService,
         private policyService:PolicyService,
         private router:Router,public formBuilder: FormBuilder,public modalService: NgbModal) { }
@@ -43,13 +48,20 @@ export class PolicyCreationComponent implements OnInit {
                 userEmail: ['', [Validators.required, Validators.email]],
                 policyCoverage: ['', [Validators.required, Validators.min(5)]],
                 policyPremium: ['', [Validators.required, Validators.min(3)]],
-                paymentStatus: ['', [Validators.required, Validators.minLength(6)]],
+                paymentStatus: ['', [Validators.required]],
                 travelStartDate: ['', [Validators.required, Validators.maxLength(10)]],
                 travelEndDate: ['', [Validators.required, Validators.maxLength(10)]],
                 dueDate: ['', [Validators.required, Validators.maxLength(10)]]
             });
         }
-
+        Status: statusList[] = [
+            {value: 'completed-0', viewValue: 'Completed'},
+            {value: 'inprogress-1', viewValue: 'In-Progress'},
+            {value: 'pending-2', viewValue: 'Pending'},
+            {value:'declined-3', viewValue: 'Declined'},
+            {value:'cancelled-4', viewValue: 'Cancelled'}
+          ];
+              
         cancel(){
         this.modalService.dismissAll();
         }
@@ -63,7 +75,7 @@ export class PolicyCreationComponent implements OnInit {
                 userEmail: userEmail,
                 policyCoverage:policyCoverage,
                 policyPremium:policyPremium,
-                paymentStatus:paymentStatus,
+                paymentStatus:this.Status.find(x => x.value === paymentStatus)?.viewValue,
                 travelStartDate:travelStartDate,
                 travelEndDate:travelEndDate, 
                 dueDate:dueDate,
