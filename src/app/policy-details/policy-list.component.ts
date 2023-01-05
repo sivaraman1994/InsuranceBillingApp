@@ -16,6 +16,10 @@ import { PolicyService } from "./policy.service";
 
 
 
+interface statusList {
+  value: string;
+  viewValue: string;
+}
 @Component({
   selector: 'app-policy-list',
   templateUrl: './policy-list.component.html',
@@ -67,6 +71,9 @@ export class PolicyListComponent implements OnInit {
     }
 
     updatePolicy(element:any){
+    let paymentStatus = this.Status.find(x => x.value === element.paymentStatus)?.viewValue;
+    console.log("what is payen: "+paymentStatus);
+    element.paymentStatus = paymentStatus;
     let headers = new HttpHeaders();
     console.log(this.policyGroup);
     this.dataArray = [];
@@ -113,6 +120,13 @@ getPolicy(){
     });
   }
 }
+Status: statusList[] = [
+  {value: 'completed-0', viewValue: 'Completed'},
+  {value: 'inprogress-1', viewValue: 'In-Progress'},
+  {value: 'pending-2', viewValue: 'Pending'},
+  {value:'declined-3', viewValue: 'Declined'},
+  {value:'cancelled-4', viewValue: 'Cancelled'}
+];
   edit(e: any) {
         e.editable = !e.editable;
   }
