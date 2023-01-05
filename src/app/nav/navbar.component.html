@@ -15,9 +15,9 @@
       <u *ngIf="isLoggedIn != true " class="nav-item" id="nav-link" routerLinkActive="active"
         [routerLinkActiveOptions]="{exact:true} " (click)="openSignUpModal()">New User? Register</u>
 
-      <u *ngIf="isLoggedIn == true " class="nav-item" id="username" style="position: fixed;  top: 10; right: 170px; word-wrap: break-word; width: 10em; ">welcome {{userName}}</u>
+      <u *ngIf="isLoggedIn == true " class="nav-item" id="username" style="  top: 10; right: 170px; word-wrap: break-word; width: 10em; ">welcome {{userName}}</u>
       <a *ngIf="isLoggedIn == true  " class="nav-item" class="btn btn-primary" routerLinkActive="active"
-        [routerLinkActiveOptions]="{exact:true} " (click)="logoff()" style="position: fixed;  top: 10; right: 80px; ">Logout</a>
+        [routerLinkActiveOptions]="{exact:true} " (click)="logoff()" style="  top: 10; margin-left: 20px; ">Logout</a>
       
         
    
