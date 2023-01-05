@@ -101,16 +101,14 @@
                 Policy Premium is Required!
               </mat-error>
 
-              <mat-form-field class="full-width">
+              <mat-form-field appearance="fill">
                 <mat-label for="paymentStatus">Payment Status</mat-label>
-                <input matInput type="text" placeholder="Payment Status" [(ngModel)]="paymentStatus" formControlName="paymentStatus"/>
-                </mat-form-field>
-                <mat-error *ngIf="(createpolicyForm.get('paymentStatus')?.touched||createpolicyForm.get('paymentStatus')?.dirty) && createpolicyForm.get('paymentStatus')?.hasError('required')">
-                  Payment Name is Required!
-                </mat-error>
-                <mat-error *ngIf="(createpolicyForm.get('paymentStatus')?.touched||createpolicyForm.get('paymentStatus')?.dirty) && createpolicyForm.get('paymentStatus')?.hasError('minlength')">
-                  Payment Status should be atleast 6 characters long!!
-                </mat-error>
+                <mat-select [(ngModel)]="paymentStatus" formControlName="paymentStatus">
+                  <mat-option *ngFor="let paymentStatus of Status" [value]="paymentStatus.value">
+                    {{paymentStatus.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
 
       <div class="clearfix">
         <button mat-raised-button type="button" class="cancelbtn" (click)="cancel()">Cancel</button>
