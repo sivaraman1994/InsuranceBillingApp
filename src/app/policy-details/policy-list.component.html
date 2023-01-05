@@ -71,10 +71,14 @@
                        </span>
                        <ng-template #editPlace>
                        
-                         <input [(ngModel)]="element.paymentStatus" class = "edit-text-box"
+                         <!-- <input [(ngModel)]="element.paymentStatus" class = "edit-text-box"
                           formControlName ="paymentStatus" 
-                          (keyup.enter)="element.editable = false" >
-                        
+                          (keyup.enter)="element.editable = false" > -->
+                          <mat-select [(ngModel)]="element.paymentStatus" formControlName="paymentStatus" (keyup.enter)="element.editable = false" >
+                            <mat-option *ngFor="let paymentStatus of Status" [value]="paymentStatus.value">
+                              {{paymentStatus.viewValue}}
+                            </mat-option>
+                          </mat-select>
                        </ng-template>
                     </td>
                  </ng-container>
