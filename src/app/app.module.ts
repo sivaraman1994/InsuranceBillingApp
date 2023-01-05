@@ -20,7 +20,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import { MatFormFieldModule,MatFormFieldControl, MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field'
 import { appRoutes } from './routes';
 import { PolicyDetailsComponent } from './policy-details/policy-details.component';
@@ -34,6 +34,7 @@ import { convertToSpacesPipe } from './policy-details/convert-to-space.pipe';
 import { RegisterService } from './services/register.service';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { MatSelectModule } from '@angular/material/select';
 import { PolicyCreationComponent } from './policy-creation/policy-creation.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 
@@ -58,6 +59,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     NgbModule,
     MatPaginatorModule,
     MatSortModule,
+    MatSelectModule,
+    MatOptionModule,
     FormsModule,
     MatInputModule,
     ReactiveFormsModule,
