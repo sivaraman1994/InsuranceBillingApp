@@ -20,4 +20,10 @@ body{
   }
   
 
-  
+  .cdk-overlay-container{
+    z-index: 9999;
+  }
+  .mat-select-min-line{
+    color: black;
+    text-size-adjust:inherit;
+  }
