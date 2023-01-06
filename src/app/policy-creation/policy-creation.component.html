@@ -19,16 +19,14 @@
           Policy ID should be atleast 3 characters long!
         </mat-error> -->
         
-        <mat-form-field class="full-width">
-        <mat-label for="policyName">Policy Name</mat-label>
-        <input matInput type="text" placeholder="Policy Name" [(ngModel)]="policyName" formControlName="policyName"/>
+        <mat-form-field appearance="fill" style="width:55%">
+          <mat-label for="policyName">Policy Name</mat-label>
+          <mat-select [(ngModel)]="policyName" formControlName="policyName">
+            <mat-option *ngFor="let policyName of Name" [value]="policyName.value">
+              {{policyName.viewValue}}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
-        <mat-error *ngIf="(createpolicyForm.get('policyName')?.touched||createpolicyForm.get('policyName')?.dirty) && createpolicyForm.get('policyName')?.hasError('required')">
-          Policy Name is Required!
-        </mat-error>
-        <mat-error *ngIf="(createpolicyForm.get('policyName')?.touched||createpolicyForm.get('policyName')?.dirty) && createpolicyForm.get('policyName')?.hasError('minlength')">
-          Policy Name should be atleast 6 characters long!
-        </mat-error>
 
         <mat-form-field class="full-width">
           <mat-label for="country">Country</mat-label>
