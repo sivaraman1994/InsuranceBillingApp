@@ -12,6 +12,11 @@ interface statusList {
     value: string;
     viewValue: string;
   }
+
+interface nameList {
+    value: string;
+    viewValue: string;
+}
 @Component({
   selector: 'app-policy-creation',
   templateUrl: './policy-creation.component.html',
@@ -43,7 +48,7 @@ export class PolicyCreationComponent implements OnInit {
 
             this.createpolicyForm = this.formBuilder.group({
                 //policyID: ['', Validators.required],
-                policyName: ['', [Validators.required, Validators.minLength(6)]],
+                policyName: ['', [Validators.required]],
                 country: ['', [Validators.required, Validators.minLength(3)]],
                 userEmail: ['', [Validators.required, Validators.email]],
                 policyCoverage: ['', [Validators.required, Validators.min(5)]],
@@ -54,6 +59,20 @@ export class PolicyCreationComponent implements OnInit {
                 dueDate: ['', [Validators.required, Validators.maxLength(10)]]
             });
         }
+        Name: nameList[] = [
+            {value: 'domestictrv-0', viewValue: 'Domestic Travel Insurance'},
+            {value: 'internationaltrv-1', viewValue: 'International Travel Insurance'},
+            {value: 'luggagetrv-2', viewValue: 'Luggage Insurance'},
+            {value:'seniorcitizentrv-3', viewValue: 'Senior Citizen Travel Insurance '},
+            {value:'singlemultitrv-4', viewValue: 'Single Multi Trip Insurance'},
+            {value:'corporatetrv-5', viewValue: 'Corporate Travel Insurance'},
+            {value:'medicaltrv-6', viewValue: 'Medical Travel Insurance'},
+            {value:'familytrv-7', viewValue: 'Family Travel Insurance'},
+            {value:'pregnancytrv-8', viewValue: 'Pregnancy Travel Insurance'},
+            
+            
+        ];
+
         Status: statusList[] = [
             {value: 'completed-0', viewValue: 'Completed'},
             {value: 'inprogress-1', viewValue: 'In-Progress'},
@@ -71,7 +90,7 @@ export class PolicyCreationComponent implements OnInit {
             policyData : {
                // policyID: policyID,
                 agentID: agentID,
-                policyName: policyName ,
+                policyName: this.Name.find(x => x.value === policyName)?.viewValue,
                 userEmail: userEmail,
                 policyCoverage:policyCoverage,
                 policyPremium:policyPremium,
